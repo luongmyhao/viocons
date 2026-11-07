@@ -789,3 +789,88 @@ body::before {
 .hero h1 .l3 { animation-delay: .45s; }
 .hero .lead { animation-delay: .6s; }
 .hero-actions { animation-delay: .75s; }
+
+/* =====================================================================
+   v22 — Headline kiểu slider (PS Concept): ảnh rõ nét, nút trái/phải "bung" hình,
+   nút Xem thêm → dự án; logo lớn trên trang chủ; sửa thanh tab bị mờ lúc mới vào trang
+   ===================================================================== */
+
+/* thanh tab: bỏ hiệu ứng làm mờ nền (gây mờ lúc mới tải), đặt lớp riêng */
+.site-header { background: rgba(255,255,255,.98); backdrop-filter: none; -webkit-backdrop-filter: none; z-index: 100; transform: translateZ(0); }
+body::before { filter: none; }
+
+/* khung slider */
+.hero-slider .hero-stage { background: #0d130d; color: #fff; }
+.hs-slides { position: absolute; inset: 0; z-index: 1; }
+.hs-slide {
+  position: absolute; inset: 0; z-index: 1; visibility: hidden;
+  background-size: cover; background-repeat: no-repeat;
+}
+.hs-slide.is-active { visibility: visible; }
+.hs-slide.is-entering { visibility: visible; z-index: 2; }
+.hs-slide.is-entering.from-right { animation: hsExpandR 1.15s cubic-bezier(.77, 0, .18, 1) both; }
+.hs-slide.is-entering.from-left { animation: hsExpandL 1.15s cubic-bezier(.77, 0, .18, 1) both; }
+@keyframes hsExpandR {
+  from { clip-path: inset(24% 4% 24% 58% round 28px); transform: scale(1.18); }
+  to   { clip-path: inset(0% 0% 0% 0% round 0px); transform: scale(1); }
+}
+@keyframes hsExpandL {
+  from { clip-path: inset(24% 58% 24% 4% round 28px); transform: scale(1.18); }
+  to   { clip-path: inset(0% 0% 0% 0% round 0px); transform: scale(1); }
+}
+/* lớp tối nhẹ chỉ để chữ trắng đọc được; ảnh vẫn rõ nét bên phải */
+.hs-overlay {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(8,12,8,.74) 0%, rgba(8,12,8,.5) 38%, rgba(8,12,8,.12) 72%, rgba(8,12,8,.04) 100%),
+    linear-gradient(0deg, rgba(8,12,8,.55) 0%, rgba(8,12,8,0) 34%);
+}
+.hero-slider .hero-grid { position: relative; z-index: 4; }
+
+/* chữ headline trắng trên ảnh */
+.hero-slider .eyebrow { color: rgba(255,255,255,.82); }
+.hero-slider .hero-title .arrow { color: #fff; }
+.hero-slider h1, .hero-slider .hero-title { color: #fff; }
+.hero-slider .lead { color: rgba(255,255,255,.9); }
+.hero-slider .hero-actions .btn-primary { box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+
+/* logo lớn, nổi bật phía trên chữ "Kiến tạo" */
+.hero-logo {
+  display: block; width: clamp(150px, 15vw, 250px); height: auto; background: #fff; padding: 10px 16px;
+  border-radius: 16px; margin-bottom: clamp(20px, 3.2vh, 38px); box-shadow: 0 14px 44px rgba(0,0,0,.4);
+  animation: dropIn .9s var(--ease) both;
+}
+
+/* nút điều khiển: trái / phải + Xem thêm */
+.hs-controls {
+  position: absolute; z-index: 5; left: var(--gutter); right: var(--gutter); bottom: clamp(18px, 4vh, 40px);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.hs-nav { display: flex; align-items: center; gap: 12px; }
+.hs-btn {
+  width: 54px; height: 54px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.85); background: rgba(255,255,255,.1);
+  color: #fff; cursor: pointer; display: grid; place-items: center; padding: 0;
+  transition: background .25s, border-color .25s, transform .25s;
+}
+.hs-btn svg { width: 22px; height: 22px; }
+.hs-btn:hover { background: var(--ui-green); border-color: var(--ui-green); transform: scale(1.07); }
+.hs-btn:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+.hs-meta { display: grid; gap: 2px; margin-left: 10px; text-transform: uppercase; letter-spacing: .14em; font-size: .76rem; color: rgba(255,255,255,.85); }
+.hs-count b { font-size: 1.5rem; letter-spacing: .04em; color: #fff; }
+.hs-more { letter-spacing: .12em; text-transform: uppercase; font-size: .85rem; padding: 17px 32px; box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+
+@media (max-width: 640px) {
+  .hs-btn { width: 46px; height: 46px; }
+  .hs-meta .hs-caption { display: none; }
+  .hs-more { padding: 14px 20px; font-size: .78rem; }
+  .hero-slider .hero-stage { padding-bottom: 70px; }
+}
+@media (prefers-reduced-motion: reduce) { .hs-slide.is-entering.from-right, .hs-slide.is-entering.from-left { animation: none; } }
+
+/* nội dung không đè lên hàng nút điều khiển; logo gọn hơn một chút */
+.hero-slider .hero-stage .hero-grid { padding: 44px 0 150px; }
+.hero-short.hero-slider .hero-stage .hero-grid { padding: 44px 0 150px; }
+.hero-logo { width: clamp(130px, 12vw, 220px); }
+@media (max-width: 640px) { .hero-slider .hero-stage .hero-grid { padding: 36px 0 120px; } }
+.hs-count, .hs-more { white-space: nowrap; }
+@media (max-width: 640px) { .hs-nav { gap: 8px; } .hs-meta { margin-left: 4px; } .hs-count b { font-size: 1.25rem; } }

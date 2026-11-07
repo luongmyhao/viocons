@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/hero.webp">
-  <link rel="stylesheet" href="css/style.css?v=21">
+  <link rel="stylesheet" href="css/style.css?v=25">
 </head>
 <body>
 
@@ -45,9 +45,17 @@
 <main>
 
 <!-- ============ HERO NGẮN (cùng thiết kế headline trang chủ) ============ -->
-<section class="hero hero-short">
+<section class="hero hero-slider hero-short">
   <div class="hero-stage">
-    <div class="hero-bg" role="img" aria-label="Công trình đang thi công với hệ giàn giáo"></div>
+    <div class="hs-slides" role="img" aria-label="Hình ảnh công trình VIOCONS đang thi công">
+      <div class="hs-slide is-active" style="background-image:url('assets/hero.webp'); background-position:50% 28%" data-caption="Giàn giáo công trình"></div>
+      <div class="hs-slide" style="background-image:url('assets/services/svc-02.webp'); background-position:50% 52%" data-caption="Cầu thang bê tông"></div>
+      <div class="hs-slide" style="background-image:url('assets/services/svc-03.webp'); background-position:50% 28%" data-caption="Cột thép chờ"></div>
+      <div class="hs-slide" style="background-image:url('assets/services/svc-04.webp'); background-position:50% 62%" data-caption="Tường xây gạch"></div>
+      <div class="hs-slide" style="background-image:url('assets/services/svc-05.webp'); background-position:50% 45%" data-caption="Cốp pha nhôm"></div>
+      <div class="hs-slide" style="background-image:url('assets/services/svc-06.webp'); background-position:50% 58%" data-caption="Sàn bê tông"></div>
+    </div>
+    <div class="hs-overlay" aria-hidden="true"></div>
     <div class="container hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">Architecture construction &nbsp;·&nbsp; An tâm đồng hành</p>
@@ -62,9 +70,19 @@
         <p class="lead">Từ tư vấn, thiết kế đến thi công — VIOCONS đồng hành cùng bạn từ ý tưởng đến công trình thực tế, mang lại giá trị bền vững, trường tồn cùng năm tháng.</p>
         <div class="hero-actions">
           <a href="index.html#du-toan" class="btn btn-primary">Dự toán chi phí</a>
-          <a href="index.html#du-an" class="btn btn-ghost">Xem dự án →</a>
         </div>
       </div>
+    </div>
+    <div class="hs-controls">
+      <div class="hs-nav">
+        <button class="hs-btn" type="button" data-dir="-1" aria-label="Hình trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="hs-btn" type="button" data-dir="1" aria-label="Hình sau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        <div class="hs-meta" aria-live="polite">
+          <span class="hs-count"><b>01</b> / 06</span>
+          <span class="hs-caption">Giàn giáo công trình</span>
+        </div>
+      </div>
+      <a class="btn btn-primary hs-more" href="index.html#du-an">Xem thêm →</a>
     </div>
   </div>
 </section>
@@ -236,6 +254,6 @@
 
 <a href="tel:0979001455" class="fab" aria-label="Gọi ngay">Gọi ngay</a>
 
-<script src="js/main.js?v=21"></script>
+<script src="js/main.js?v=25"></script>
 </body>
 </html>

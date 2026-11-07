@@ -54,6 +54,63 @@
     counters.forEach(function (c) { c.textContent = c.dataset.count + (c.dataset.suffix || ''); });
   }
 
+  /* ---- hero slider: nút trái/phải, hình "bung" ra toàn khung ---- */
+  (function () {
+    var hero = document.querySelector('.hero-slider');
+    if (!hero) return;
+    var slides = [].slice.call(hero.querySelectorAll('.hs-slide'));
+    if (slides.length < 2) return;
+    var idx = 0, busy = false;
+    var countEl = hero.querySelector('.hs-count b');
+    var capEl = hero.querySelector('.hs-caption');
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function label(n) {
+      countEl.textContent = pad(n + 1);
+      capEl.textContent = slides[n].getAttribute('data-caption') || '';
+    }
+    function go(dir) {
+      if (busy) return;
+      var next = (idx + dir + slides.length) % slides.length;
+      var from = slides[idx], to = slides[next];
+      busy = true;
+      // hình mới bung ra từ phía nút vừa bấm
+      to.classList.remove('from-left', 'from-right');
+      to.classList.add('is-entering', dir > 0 ? 'from-right' : 'from-left');
+      label(next);
+      var done = false;
+      function finish() {
+        if (done) return;
+        done = true;
+        from.classList.remove('is-active');
+        to.classList.remove('is-entering', 'from-left', 'from-right');
+        to.classList.add('is-active');
+        idx = next;
+        busy = false;
+      }
+      to.addEventListener('animationend', finish, { once: true });
+      setTimeout(finish, 1400); // dự phòng khi người dùng tắt hiệu ứng chuyển động
+    }
+    hero.querySelectorAll('.hs-btn').forEach(function (b) {
+      b.addEventListener('click', function () { go(+b.getAttribute('data-dir')); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      var tag = (document.activeElement && document.activeElement.tagName) || '';
+      if (/INPUT|TEXTAREA|SELECT/.test(tag)) return;
+      var r = hero.getBoundingClientRect();
+      if (r.bottom < innerHeight * 0.4 || r.top > innerHeight * 0.6) return;
+      go(e.key === 'ArrowRight' ? 1 : -1);
+    });
+    // vuốt ngang trên điện thoại
+    var x0 = null;
+    hero.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    hero.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+    }, { passive: true });
+  })();
+
   // Các khối dưới đây chỉ chạy trên trang chủ (trang Giới thiệu không có dự án / form)
   if (!document.getElementById('projects')) return;
 
