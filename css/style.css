@@ -696,3 +696,11 @@ body::before {
 .page-hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
 .page-hero h1::after { content: ""; display: block; width: 56px; height: 4px; background: var(--orange); margin-top: 20px; }
 .page-lead { margin-top: 20px; max-width: 56ch; color: var(--ink-2); font-size: 1.05rem; }
+
+/* ---------- headline rút gọn cho trang con: cùng thiết kế trang chủ, thấp hơn ---------- */
+.hero-short .hero-stage { min-height: clamp(340px, 46vh, 440px); }
+.hero-short .hero-stage .hero-grid { padding: 44px 0; }
+.hero-short .hero-title .arrow { width: clamp(44px, 6vw, 72px); }
+.hero-short h1 .l2 { font-size: clamp(2.3rem, 5.4vw, 4.4rem); }
+.hero-short .lead { margin-top: 22px; }
+@media (max-width: 760px) { .hero-short .hero-stage { min-height: 300px; } .hero-short .hero-stage .hero-grid { padding: 36px 0; } }
