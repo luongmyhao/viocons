@@ -1438,3 +1438,42 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
 /* chừa chỗ cho cụm nút liên hệ nhanh bên phải */
 .site-footer .ft-grid, .site-footer .copyright { padding-right: 68px; box-sizing: border-box; }
 @media (max-width: 760px) { .site-footer .ft-grid, .site-footer .copyright { padding-right: 52px; } }
+
+/* =====================================================================
+   v65 — menu "Dự án" có thư mục con; trang Dự án (dân dụng / công cộng)
+   ===================================================================== */
+.nav-item { position: relative; display: flex; }
+.nav-item > a { display: block; }
+.nav-sub {
+  position: absolute; left: 50%; top: calc(100% + 8px); transform: translateX(-50%) translateY(6px); min-width: 230px; padding: 8px;
+  background: #fff; border-radius: 14px; box-shadow: 0 18px 50px rgba(0,0,0,.3); opacity: 0; visibility: hidden; transition: opacity .25s, transform .25s, visibility .25s; z-index: 5;
+}
+.nav-sub::before { content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
+.nav-item:hover .nav-sub, .nav-item:focus-within .nav-sub { opacity: 1; visibility: visible; transform: translateX(-50%); }
+@media (min-width: 901px) {
+  .nav .nav-sub a { color: var(--ink); background: none; padding: 11px 16px; border-radius: 10px; font-weight: 500; display: block; white-space: nowrap; }
+  .nav .nav-sub a:hover { background: var(--soft); color: var(--ui-green); }
+}
+@media (max-width: 900px) {
+  .nav-item { display: block; }
+  .nav-sub { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; padding: 0 0 0 18px; min-width: 0; background: none; }
+  .nav-sub a { font-size: .95rem; color: var(--muted); }
+  .nav-sub::before { display: none; }
+}
+
+/* trang Dự án */
+.pj-page { background: var(--ink); color: #fff; padding-bottom: 0; }
+.pj-page h2 { color: #fff; }
+.pj-page .eyebrow { color: rgba(255,255,255,.7); }
+.pj-page .subnav a { background: transparent; border-color: rgba(255,255,255,.4); color: #fff; }
+.pj-page .subnav a b { font-weight: 600; opacity: .7; margin-left: 4px; }
+.pj-page .subnav a:hover { background: var(--ui-green); border-color: var(--ui-green); }
+.pj-folder { padding: clamp(40px, 5vw, 72px) 0 0; border-top: 1px solid rgba(255,255,255,.12); margin-top: clamp(24px, 3vw, 40px); }
+.pj-folder-head { margin-bottom: 26px; display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
+.pj-folder-head h3 { font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 800; letter-spacing: -.01em; }
+.pj-folder-head p { color: rgba(255,255,255,.65); }
+.pj-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.pj-grid .pj-card { flex: none; min-width: 0; height: clamp(420px, 62vh, 620px); }
+@media (max-width: 1100px) { .pj-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 800px) { .pj-grid { grid-template-columns: repeat(2, 1fr); } .pj-grid .pj-card { height: 440px; } }
+@media (max-width: 520px) { .pj-grid { grid-template-columns: 1fr; } .pj-grid .pj-card { height: 460px; } }

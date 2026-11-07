@@ -233,24 +233,7 @@
   /* ---- projects (nguồn: xaydungviocons.com.vn) ---- */
   // group: dan-dung | cong-cong · kind: school | road | water | house
   // Thêm ảnh thật: đặt file vào assets/projects/ và thêm  img: 'assets/projects/ten-file.jpg'
-  var PROJECTS = [
-    { name: 'ECO RETREAT', meta: 'Khu nhà ở liền kề', group: 'dan-dung', kind: 'house', label: 'Dân dụng' },
-    { name: 'The Grand Manhattan', meta: 'Công trình dân dụng', group: 'dan-dung', kind: 'house', label: 'Dân dụng' },
-    { name: 'Sửa chữa trường THCS Tăng Bạt Hổ', meta: 'Phường Xóm Chiếu, TP. Hồ Chí Minh', group: 'cong-cong', kind: 'school', label: 'Trường học' },
-    { name: 'Sửa chữa trường Mầm non 19/5', meta: 'Quận 8, TP. Hồ Chí Minh', group: 'cong-cong', kind: 'school', label: 'Trường học' },
-    { name: 'Sửa chữa trường THCS Lý Thánh Tông', meta: 'Quận 8, TP. Hồ Chí Minh', group: 'cong-cong', kind: 'school', label: 'Trường học' },
-    { name: 'Sửa chữa trường Tiểu học Mỹ Lộc', meta: 'Cần Giuộc, Long An', group: 'cong-cong', kind: 'school', label: 'Trường học' },
-    { name: 'Đường Tỉnh 826C', meta: 'Đông Thạnh, Cần Giuộc', group: 'cong-cong', kind: 'road', label: 'Hạ tầng' },
-    { name: 'Đường Tân Quý – Tân Đại', meta: 'Tân Tập, Cần Giuộc', group: 'cong-cong', kind: 'road', label: 'Hạ tầng' },
-    { name: 'Rạch Bảo Định', meta: 'Mỹ Tho, Tiền Giang', group: 'cong-cong', kind: 'water', label: 'Hạ tầng' },
-    { name: 'Kè Tân Thành', meta: 'Gò Công Đông, Tiền Giang', group: 'cong-cong', kind: 'water', label: 'Hạ tầng' }
-  ];
-  // ảnh thật của từng dự án (cùng thứ tự với PROJECTS)
-  ['eco-retreat', 'grand-manhattan', 'tang-bat-ho', 'mam-non-19-5', 'ly-thanh-tong', 'my-loc', 'duong-826c', 'tan-quy-tan-dai', 'rach-bao-dinh', 'ke-tan-thanh']
-    .forEach(function (f, i) { PROJECTS[i].img = 'assets/projects/' + f + '.png'; });
-  // ảnh mới cho 6 dự án đầu (theo thứ tự dự án)
-  var NEWIMG = { 0: 'pj-eco-retreat', 1: 'pj-grand-manhattan', 2: 'pj-tang-bat-ho', 3: 'pj-mam-non', 4: 'pj-ly-thanh-tong', 5: 'pj-my-loc' };
-  Object.keys(NEWIMG).forEach(function (k) { PROJECTS[+k].img = 'assets/projects/' + NEWIMG[k] + '.webp?v=2'; });
+  var PROJECTS = window.VIOCONS_PROJECTS;
   var TONES ={ house: '#3f7a3a', school: '#c9722a', road: '#4a4f55', water: '#2f6a86' };
 
   // line-art thumbnail by project kind (illustration only, until real photos are added)
