@@ -651,26 +651,16 @@ h2 {
 }
 
 /* =====================================================================
-   v9 — Tràn viền · ảnh headline làm nền toàn trang · màu xanh – cam logo
+   v14 — Tràn viền + ảnh headline làm nền cố định toàn trang.
+   Nội dung nằm trên mặt nền sáng/tối gần đặc để chữ luôn rõ; ảnh hiện qua
+   các "ô cửa ảnh" giữa các phần (hiệu ứng parallax).
    ===================================================================== */
-:root {
-  --green: #096b3b;      /* xanh logo */
-  --green-d: #064d2a;
-  --orange: #f98a14;     /* cam logo */
-  --ink: #0a2a1a;
-  --ink-2: #2f4a3b;
-  --muted: #5b7166;
-  --line: #dce6dd;
-  --soft: #f1f6f0;
-  --gutter: clamp(16px, 4vw, 72px);
-}
-html { background: #082a19; }
+:root { --gutter: clamp(16px, 4vw, 72px); }
+html { background: #111; }
 body { background: transparent; }
-
-/* ảnh headline = nền cố định của cả trang */
 body::before {
   content: ""; position: fixed; inset: 0; z-index: -2;
-  background: url("../assets/hero.webp") center 30% / cover no-repeat; filter: grayscale(1) contrast(1.05);
+  background: url("../assets/hero.webp") center 30% / cover no-repeat; filter: grayscale(1);
 }
 
 /* tràn viền */
@@ -680,140 +670,14 @@ body::before {
 .hero-copy { max-width: 680px; }
 @media (min-width: 1600px) { .projects { grid-template-columns: repeat(4, 1fr); } }
 
-/* hero: ảnh nền cố định hiện qua lớp phủ trắng nhạt dần sang phải */
-.hero-bg, .hero-bg {
-  background: linear-gradient(90deg, rgba(255,255,255,.97) 0%, rgba(255,255,255,.92) 30%, rgba(255,255,255,.4) 58%, rgba(255,255,255,0) 100%);
-}
-@media (max-width: 760px) {
-  .hero-bg { background: linear-gradient(180deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.88) 55%, rgba(255,255,255,.55) 100%); }
-}
+/* mặt nền các phần: gần đặc, chữ rõ */
+.site-header { background: rgba(255,255,255,.94); backdrop-filter: blur(10px); }
+.stats { background: rgba(255,255,255,.94); box-shadow: 0 0 0 100vmax rgba(255,255,255,.94); clip-path: inset(0 -100vmax); }
+.section { background: rgba(255,255,255,.94); }
+.section-soft, .contact { background: rgba(244,245,242,.94); }
+.section-dark { background: rgba(16,16,16,.92); }
+.site-footer { background: rgba(14,14,14,.96); }
 
-/* các phần: lớp phủ trong suốt để thấy ảnh nền phía sau */
-.site-header { background: rgba(255,255,255,.93); }
-.site-header::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px;
-  background: linear-gradient(90deg, var(--orange), var(--green));
-}
-.stats { background: rgba(255,255,255,.9); box-shadow: 0 0 0 100vmax rgba(255,255,255,.9); clip-path: inset(0 -100vmax); }
-.section { background: rgba(255,255,255,.82); }
-.section-soft { background: rgba(238,246,238,.78); }
-.section-dark { background: rgba(5,48,28,.86); }
-.contact { background: rgba(238,246,238,.78); }
-.site-footer { background: rgba(4,32,18,.94); }
-
-/* màu chủ đạo xanh – cam */
-.eyebrow { display: inline-flex; align-items: center; gap: 12px; color: var(--green); }
-.eyebrow::before { content: ""; width: 28px; height: 3px; background: var(--orange); flex: none; }
-.section-dark .eyebrow, .cta .eyebrow { color: #ffb261; }
-.btn-primary { background: var(--green); color: #fff; }
-.btn-primary:hover { background: var(--orange); }
-.btn-ghost { border-color: var(--green); color: var(--green); }
-.btn-ghost:hover { background: var(--green); color: #fff; }
-.header-cta { border-color: var(--green); }
-.header-cta:hover { background: var(--green); }
-.chip:hover { border-color: var(--green); }
-.chip.active { background: var(--green); border-color: var(--green); }
-.hero h1 .l2 { color: var(--green); }
-.hero-title .arrow { color: var(--orange); }
-.stat b, .team-stats b { color: var(--green); }
-.team-stats.on-dark b, .section-dark .stat b { color: #fff; }
-.menu-btn span { background: var(--green); }
-.nav a:hover, .nav a.active { color: var(--green); }
-.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--green); box-shadow: 0 0 0 4px rgba(9,107,59,.12); }
-.pack input:checked + span { border-color: var(--green); background: var(--green); }
-.pack label:hover span { border-color: var(--green); }
-.subnav a:hover { background: var(--green); border-color: var(--green); }
-.dots li:hover i { background: var(--green); border-color: var(--green); }
-.dots i { border-color: var(--green); color: var(--green); }
-.node { border-color: var(--green); }
-.stepper::before { background: var(--green); }
-.stepper.on-dark .node { border-color: var(--orange); }
-.stepper.on-dark::before { background: var(--orange); opacity: .55; }
-.pillar { border-top-color: var(--green); }
-.tech li { border-color: var(--green); color: var(--green); }
-.tech.dark li { border-color: #fff; color: #fff; }
-.scope li { border-color: var(--green); color: var(--green); }
-.estimate, .eq-card, .scope-photo { background: var(--ink); }
-.estimate { background: linear-gradient(160deg, #0b4a2a, #07331c); }
-.service.has-photo, .service:hover { background: #07331c; }
-.fab { background: var(--green); }
-.foot-logo { background: #fff; }
-.site-footer a:hover { color: var(--orange); }
-.copyright { border-top-color: rgba(255,255,255,.12); }
-::selection { background: var(--orange); color: #fff; }
-
-/* độ đọc: tăng nhẹ lớp phủ phần sáng, ô chọn nền trắng */
-.section { background: rgba(255,255,255,.87); }
-.section-soft, .contact { background: rgba(236,245,236,.85); }
-.pack span { background: #fff; }
-
-/* =====================================================================
-   v11 — Ảnh nền trần: bỏ mọi màu nền của các phần, chữ ghi đè trực tiếp lên ảnh
-   ===================================================================== */
-:root { --ink-2: #1c3a2a; --muted: #3d5648; --line: rgba(10,42,26,.28); }
-.hero-bg { background: none; }
-.stats { background: transparent; box-shadow: none; clip-path: none; }
-.section, .section-soft, .section-dark, .contact, .site-footer { background: transparent; }
-.site-header { background: rgba(255,255,255,.9); backdrop-filter: blur(8px); }
-
-/* chữ trên ảnh: viền sáng mảnh để dễ đọc, không dùng màu nền */
-main :where(h1, h2, h3, h4, p, li, span, b, small, label, dt, dd, a, figcaption, summary, legend, em, i, blockquote) {
-  text-shadow: 0 0 6px rgba(255,255,255,.95), 0 0 14px rgba(255,255,255,.75);
-}
-.estimate, .estimate *, .service.has-photo, .service.has-photo *, .eq-card, .eq-card *, .scope-photo *,
-.btn-primary, .btn-light, .chip.active, .project .tag, .pack input:checked + span, .fab, .form *, .panel *,
-.pledge *, .field input, .field select, .field textarea, .badge { text-shadow: none; }
-
-/* các phần trước đây nền đen → chữ tối trên ảnh */
-.section-dark, .section-dark h2, .section-dark h3 { color: var(--ink); }
-.section-dark .eyebrow, .cta .eyebrow { color: var(--green); }
-.section-dark .sub { color: var(--ink-2); }
-.steps li { border-top-color: var(--line); }
-.steps li:last-child { border-bottom-color: var(--line); }
-.steps p { color: var(--ink-2); }
-.steps li > span { border-color: var(--green); color: var(--green); }
-.offer + .offer { border-left-color: var(--line); }
-.offer h3 { color: var(--ink); }
-.offer p { color: var(--ink-2); }
-.ring { border-color: var(--green); }
-.ring:hover { border-color: var(--orange); background: rgba(255,255,255,.35); }
-.ring h3 { color: var(--ink); }
-.ring p { color: var(--ink-2); }
-.stepper.on-dark .node { border-color: var(--green); color: var(--ink); background: rgba(255,255,255,.9); }
-.stepper.on-dark::before { background: var(--green); opacity: .8; }
-.stepper.on-dark b { color: var(--ink); }
-.stepper.on-dark small { color: var(--ink-2); }
-.team-stats.on-dark { border-top-color: var(--line); }
-.team-stats.on-dark div + div { border-left-color: var(--line); }
-.team-stats.on-dark b { color: var(--green); }
-.team-stats.on-dark span { color: var(--ink-2); }
-.tech.dark h3 { color: var(--ink); }
-.tech.dark li { border-color: var(--green); color: var(--green); }
-.more-light { color: var(--green); }
-.value h3 { color: var(--ink); }
-.value p { color: var(--ink-2); }
-.value + .value { border-left-color: var(--line); }
-.btn-outline-light { border-color: var(--green); color: var(--green); }
-.btn-outline-light:hover { background: var(--green); color: #fff; }
-.btn-light { background: var(--green); color: #fff; }
-.btn-light:hover { background: var(--orange); color: #fff; }
-.estimate .btn-light { background: #fff; color: var(--ink); }
-.estimate .btn-light:hover { background: var(--orange); color: #fff; }
-
-/* chân trang trên ảnh */
-.site-footer { color: var(--ink); border-top: 3px solid var(--green); }
-.site-footer h4, .foot-name { color: var(--ink); }
-.site-footer a { color: var(--ink-2); }
-.site-footer a:hover { color: var(--orange); }
-.copyright { color: var(--ink-2); border-top-color: var(--line); }
-
-/* làm nhạt tương phản của chính tấm ảnh nền (không thêm lớp màu) để chữ ghi đè dễ đọc */
-body::before { filter: grayscale(1) contrast(.6) brightness(1.4); }
-
-/* viền sáng đậm hơn cho chữ nhỏ; nút viền có nền trắng nhạt để dễ bấm */
-main :where(h1, h2, h3, h4, p, li, span, b, small, label, dt, dd, a, figcaption, summary, legend, em, i, blockquote) {
-  text-shadow: 0 0 3px #fff, 0 0 8px #fff, 0 0 16px rgba(255,255,255,.85);
-}
-.btn-ghost, .btn-outline-light { background: rgba(255,255,255,.88); }
-.btn-ghost:hover, .btn-outline-light:hover { background: var(--green); color: #fff; }
-.btn-ghost, .btn-ghost *, .btn-outline-light { text-shadow: none; }
+/* ô cửa ảnh: để lộ ảnh nền cố định giữa các phần */
+.photo-band { height: clamp(180px, 34vh, 380px); }
+@media (max-width: 640px) { .photo-band { height: 140px; } }
