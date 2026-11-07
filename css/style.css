@@ -1162,3 +1162,62 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
 
 /* bỏ lớp làm nét SVG (nặng, làm hiệu ứng chuyển ảnh bị khựng); giữ độ tối và tương phản */
 .hs-slide { filter: brightness(.78) contrast(1.14) saturate(.92); will-change: opacity, transform; }
+
+/* =====================================================================
+   v50 — Dự án: dải cột ảnh dọc kiểu trưng bày (tên ở trên, loại công trình viết dọc, PREV/NEXT, bấm để phóng ảnh)
+   ===================================================================== */
+.pj-section { background: #1d1d1d; color: #fff; padding-bottom: 0; }
+.pj-section h2 { color: #fff; }
+.pj-section .eyebrow { color: rgba(255,255,255,.7); }
+.pj-section .chip { background: transparent; color: #fff; border-color: rgba(255,255,255,.4); }
+.pj-section .chip:hover { border-color: #fff; }
+.pj-section .chip.active { background: var(--ui-green); border-color: var(--ui-green); }
+.pj-wrap { position: relative; margin-top: 8px; }
+.pj-strip { display: flex; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; outline: none; }
+.pj-strip::-webkit-scrollbar { display: none; }
+.pj-card {
+  position: relative; flex: 0 0 25%; min-width: 260px; height: clamp(480px, 74vh, 760px); scroll-snap-align: start; overflow: hidden;
+  cursor: zoom-in; isolation: isolate; border-right: 1px solid rgba(255,255,255,.08);
+}
+.pj-card.hide { display: none; }
+.pj-img { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: -2; transition: transform 1.1s var(--ease); }
+.pj-card::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(0,0,0,.52); transition: background .5s; }
+.pj-card:hover::before, .pj-card:focus-visible::before { background: rgba(0,0,0,.08); }
+.pj-card:hover .pj-img { transform: scale(1.05); }
+.pj-card:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+.pj-name { position: absolute; top: 44px; left: 44px; right: 24px; font-size: clamp(1.1rem, 1.6vw, 1.5rem); font-weight: 400; letter-spacing: .08em; text-transform: uppercase; line-height: 1.3; color: #fff; }
+.pj-meta { position: absolute; top: calc(44px + 3.4em); left: 44px; right: 24px; font-size: .8rem; color: rgba(255,255,255,.75); letter-spacing: .04em; }
+.pj-type {
+  position: absolute; left: 40px; bottom: 36px; writing-mode: vertical-rl; transform: rotate(180deg); text-transform: uppercase;
+  letter-spacing: .38em; font-size: .72rem; color: rgba(255,255,255,.9); white-space: nowrap;
+}
+.pj-zoom {
+  position: absolute; left: 50%; top: 50%; width: 92px; height: 92px; margin: -46px 0 0 -46px; border-radius: 50%; display: grid; place-items: center;
+  background: rgba(212,190,150,.72); color: #fff; opacity: 0; transform: scale(.5); transition: opacity .35s, transform .45s var(--ease); pointer-events: none;
+}
+.pj-zoom svg { width: 34px; height: 34px; }
+.pj-card:hover .pj-zoom, .pj-card:focus-visible .pj-zoom { opacity: 1; transform: none; }
+.pj-nav {
+  position: absolute; z-index: 3; top: 50%; transform: translateY(-50%); background: none; border: 0; color: #fff; cursor: pointer;
+  letter-spacing: .4em; font-size: .78rem; padding: 18px 22px; text-shadow: 0 1px 8px rgba(0,0,0,.7); transition: letter-spacing .3s, color .3s;
+}
+.pj-nav:hover { letter-spacing: .55em; color: #ffd9a0; }
+.pj-prev { left: 4px; }
+.pj-next { right: 4px; }
+
+/* cửa sổ phóng ảnh */
+.pj-lightbox { position: fixed; inset: 0; z-index: 300; background: rgba(8,8,8,.92); display: grid; place-items: center; opacity: 0; transition: opacity .25s; padding: 24px; }
+.pj-lightbox.open { opacity: 1; }
+.pj-lightbox[hidden] { display: none; }
+.pj-lightbox figure { margin: 0; max-width: min(92vw, 900px); max-height: 92vh; display: grid; gap: 14px; justify-items: center; }
+.pj-lightbox img { max-width: 100%; max-height: 78vh; object-fit: contain; border-radius: 8px; }
+.pj-lightbox figcaption { color: #fff; text-align: center; display: grid; gap: 4px; }
+.pj-lightbox figcaption span { color: rgba(255,255,255,.7); font-size: .9rem; }
+.pj-close { position: absolute; top: 14px; right: 22px; background: none; border: 0; color: #fff; font-size: 2.6rem; line-height: 1; cursor: pointer; }
+
+@media (max-width: 1020px) { .pj-card { flex-basis: 40%; } }
+@media (max-width: 640px) { .pj-card { flex-basis: 78%; height: 68vh; } .pj-name { left: 28px; top: 32px; } .pj-meta { left: 28px; } .pj-type { left: 24px; } .pj-nav { padding: 14px 10px; } }
+
+.pj-head { position: absolute; top: 44px; left: 44px; right: 24px; display: grid; gap: 8px; }
+.pj-head .pj-name, .pj-head .pj-meta { position: static; }
+@media (max-width: 640px) { .pj-head { left: 28px; top: 32px; } }

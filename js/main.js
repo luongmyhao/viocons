@@ -249,13 +249,16 @@
   function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   var grid = document.getElementById('projects');
+  var ZOOM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21M10.5 7.5v6M7.5 10.5h6"/></svg>';
+  var TYPE = { 'dan-dung': 'Công trình dân dụng', 'cong-cong': 'Công trình công cộng' };
   grid.innerHTML = PROJECTS.map(function (p, i) {
-    var media = p.img
-      ? '<img src="' + esc(p.img) + '" alt="' + esc(p.name) + '" loading="lazy">'
-      : art(p, i);
-    return '<article class="project reveal in" data-cat="' + p.group + '">' +
-      '<div class="thumb">' + media + '<span class="tag">' + esc(p.label) + '</span></div>' +
-      '<h3>' + esc(p.name) + '</h3><p>' + esc(p.meta) + '</p></article>';
+    var bg = p.img ? "background-image:url('" + esc(p.img) + "')" : 'background:' + TONES[p.kind];
+    return '<article class="pj-card" data-cat="' + p.group + '" data-i="' + i + '" tabindex="0" role="button" aria-label="Xem ảnh ' + esc(p.name) + '">' +
+      '<div class="pj-img" style="' + bg + '"></div>' +
+      '<span class="pj-zoom">' + ZOOM + '</span>' +
+      '<div class="pj-head"><h3 class="pj-name">' + esc(p.name) + '</h3>' +
+      '<p class="pj-meta">' + esc(p.meta) + '</p></div>' +
+      '<span class="pj-type">' + TYPE[p.group] + '</span></article>';
   }).join('');
 
   var filters = document.getElementById('filters');
@@ -264,10 +267,48 @@
     if (!btn) return;
     filters.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('active', c === btn); });
     var f = btn.dataset.filter;
-    grid.querySelectorAll('.project').forEach(function (el) {
+    grid.querySelectorAll('.pj-card').forEach(function (el) {
       el.classList.toggle('hide', f !== 'all' && el.dataset.cat !== f);
     });
+    grid.scrollTo({ left: 0 });
   });
+
+  // PREV / NEXT: cuộn từng thẻ
+  function pjStep(dir) {
+    var card = grid.querySelector('.pj-card:not(.hide)');
+    var w = card ? card.getBoundingClientRect().width : grid.clientWidth / 4;
+    grid.scrollBy({ left: dir * w, behavior: 'smooth' });
+  }
+  document.querySelector('.pj-prev').addEventListener('click', function () { pjStep(-1); });
+  document.querySelector('.pj-next').addEventListener('click', function () { pjStep(1); });
+
+  // bấm vào dự án: phóng to ảnh
+  var lb = document.createElement('div');
+  lb.className = 'pj-lightbox'; lb.hidden = true;
+  lb.innerHTML = '<button type="button" class="pj-close" aria-label="Đóng">×</button><figure><img alt=""><figcaption></figcaption></figure>';
+  document.body.appendChild(lb);
+  function openLb(i) {
+    var p = PROJECTS[i];
+    var img = lb.querySelector('img');
+    if (p.img) { img.src = p.img; img.hidden = false; } else { img.removeAttribute('src'); img.hidden = true; }
+    img.alt = p.name;
+    lb.querySelector('figcaption').innerHTML = '<b>' + esc(p.name) + '</b><span>' + esc(p.meta) + '</span>';
+    lb.hidden = false;
+    requestAnimationFrame(function () { lb.classList.add('open'); });
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb() {
+    lb.classList.remove('open');
+    setTimeout(function () { lb.hidden = true; }, 250);
+    document.body.style.overflow = '';
+  }
+  grid.addEventListener('click', function (e) { var c = e.target.closest('.pj-card'); if (c) openLb(+c.dataset.i); });
+  grid.addEventListener('keydown', function (e) {
+    var c = e.target.closest('.pj-card');
+    if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openLb(+c.dataset.i); }
+  });
+  lb.addEventListener('click', function (e) { if (e.target === lb || e.target.closest('.pj-close')) closeLb(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) closeLb(); });
 
   /* ---- dự toán chi phí ---- */
   // ĐƠN GIÁ THAM KHẢO (VNĐ / m² sàn xây dựng) — chỉnh tại đây cho đúng đơn giá thực tế của VIOCONS.
