@@ -38,10 +38,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
   color: var(--muted); margin-bottom: 18px;
 }
 h2 {
-  font-size: clamp(1.3rem, 2.5vw, 1.95rem); line-height: 1.5; font-weight: 400; letter-spacing: .14em; text-transform: uppercase;
+  font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.15; font-weight: 800; letter-spacing: -.02em;
 }
-.hl { color: var(--green); }
-.section-dark .hl, .cta .hl { color: #6fae72; }
 .sub { color: var(--muted); margin-top: 18px; max-width: 52ch; }
 
 /* ---------- buttons ---------- */
@@ -96,10 +94,10 @@ h2 {
 .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; }
 .hero-title { display: flex; align-items: flex-start; gap: 22px; }
 .hero-title .arrow { flex: none; width: clamp(54px, 8vw, 92px); margin-top: 6px; color: var(--ink); }
-.hero h1 { display: flex; flex-direction: column; line-height: 1; letter-spacing: -.012em; text-transform: uppercase; }
-.hero h1 .l1 { font-size: clamp(1.1rem, 2.2vw, 1.6rem); font-weight: 600; letter-spacing: 0; margin-bottom: 6px; }
+.hero h1 { display: flex; flex-direction: column; line-height: 1; letter-spacing: -.03em; text-transform: uppercase; }
+.hero h1 .l1 { font-size: clamp(1.1rem, 2.2vw, 1.6rem); font-weight: 600; letter-spacing: -.01em; margin-bottom: 6px; }
 .hero h1 .l2 { font-size: clamp(2.6rem, 6.6vw, 5.2rem); font-weight: 800; }
-.hero h1 .l3 { font-size: clamp(1.1rem, 2.2vw, 1.6rem); font-weight: 500; letter-spacing: 0; margin-top: 10px; }
+.hero h1 .l3 { font-size: clamp(1.1rem, 2.2vw, 1.6rem); font-weight: 500; letter-spacing: -.01em; margin-top: 10px; }
 .lead { max-width: 46ch; margin-top: 30px; color: var(--ink-2); font-size: 1.05rem; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
 .hero-art { position: relative; color: var(--ink); }
@@ -118,7 +116,7 @@ h2 {
 }
 .stat { padding: 30px 24px 30px 0; }
 .stat + .stat { padding-left: 24px; border-left: 1px solid var(--line); }
-.stat b { display: block; font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 800; letter-spacing: -.008em; line-height: 1.1; }
+.stat b { display: block; font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
 .stat span { color: var(--muted); font-size: .9rem; }
 
 /* ---------- sections ---------- */
@@ -136,7 +134,7 @@ h2 {
   transition: background .3s, color .3s; position: relative;
 }
 .service .num { display: block; font-size: .8rem; font-weight: 600; color: var(--orange); letter-spacing: .1em; margin-bottom: 40px; }
-.service h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; letter-spacing: 0; }
+.service h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -.01em; }
 .service p { color: var(--muted); font-size: .95rem; transition: color .3s; }
 .service:hover { background: var(--ink); color: #fff; }
 .service:hover p { color: #bdbdb8; }
@@ -170,7 +168,7 @@ h2 {
 .project .tag {
   position: absolute; left: 14px; top: 14px; background: #fff; border-radius: 999px; padding: 4px 12px; font-size: .75rem; font-weight: 600;
 }
-.project h3 { font-size: 1.1rem; font-weight: 700; margin-top: 18px; letter-spacing: 0; }
+.project h3 { font-size: 1.1rem; font-weight: 700; margin-top: 18px; letter-spacing: -.01em; }
 .project p { color: var(--muted); font-size: .9rem; }
 
 /* pledges */
@@ -180,7 +178,7 @@ h2 {
   border: 1px solid var(--line); transition: transform .3s var(--ease), border-color .3s;
 }
 .pledge:hover { transform: translateY(-4px); border-color: var(--green); }
-.pledge b { display: block; font-size: 1.7rem; font-weight: 800; color: var(--green); letter-spacing: -.008em; margin-bottom: 8px; }
+.pledge b { display: block; font-size: 1.7rem; font-weight: 800; color: var(--green); letter-spacing: -.02em; margin-bottom: 8px; }
 .tech { margin-top: 64px; }
 .tech h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 18px; }
 .tech ul { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -212,7 +210,7 @@ h2 {
 
 .estimate { background: var(--ink); color: #fff; border-radius: 20px; padding: clamp(28px, 4vw, 44px); position: sticky; top: 100px; }
 .est-label { color: #a9a9a4; font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; }
-.est-value { font-size: clamp(2rem, 4.4vw, 3.1rem); font-weight: 800; letter-spacing: -.008em; line-height: 1.1; margin: 14px 0 8px; color: #fff; }
+.est-value { font-size: clamp(2rem, 4.4vw, 3.1rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; margin: 14px 0 8px; color: #fff; }
 .est-value small { font-size: .45em; font-weight: 600; color: #a9a9a4; margin-left: 6px; }
 .est-range { color: #a9a9a4; font-size: .9rem; min-height: 1.4em; }
 .estimate hr { border: 0; border-top: 1px solid #2c2c2c; margin: 28px 0; }
@@ -334,7 +332,7 @@ h2 {
 .value { padding: 12px 40px 12px 0; }
 .value + .value { padding-left: 40px; border-left: 1px solid #2c2c2c; }
 .value .num { display: block; color: var(--orange); font-size: .8rem; font-weight: 600; letter-spacing: .1em; margin-bottom: 28px; }
-.value h3 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 800; letter-spacing: -.008em; margin-bottom: 14px; color: #fff; }
+.value h3 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 800; letter-spacing: -.02em; margin-bottom: 14px; color: #fff; }
 .value p { color: #a9a9a4; }
 
 .contact-list li { grid-template-columns: 140px 1fr; }
@@ -445,7 +443,7 @@ h2 {
 .team-stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
 .team-stats div { padding: 26px 20px 26px 0; }
 .team-stats div + div { padding-left: 24px; border-left: 1px solid var(--line); }
-.team-stats b { display: block; font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 800; letter-spacing: -.008em; line-height: 1.1; }
+.team-stats b { display: block; font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
 .team-stats span { color: var(--muted); font-size: .9rem; }
 .team-note { color: var(--muted); font-size: .9rem; margin: 8px 0 48px; }
 
@@ -530,7 +528,7 @@ h2 {
   content: ""; position: absolute; inset: -14px; border: 1.5px dashed var(--orange); border-radius: 50%; animation: spin 40s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-.medal h3 { font-size: 1.5rem; font-weight: 800; letter-spacing: 0; margin-bottom: 20px; }
+.medal h3 { font-size: 1.5rem; font-weight: 800; letter-spacing: -.01em; margin-bottom: 20px; }
 .dots { display: grid; gap: 14px; width: 100%; }
 .dots li { display: flex; align-items: center; gap: 16px; color: var(--ink-2); }
 .dots i {
@@ -588,12 +586,12 @@ h2 {
 /* ---------- Dịch vụ 02: phạm vi thi công + năng lực thi công ---------- */
 .scope-layout { display: grid; grid-template-columns: .82fr 1.18fr; gap: clamp(32px, 6vw, 88px); align-items: start; }
 .scope-aside { position: sticky; top: 100px; }
-.scope-title { font-size: clamp(1.5rem, 2.8vw, 2.1rem); font-weight: 800; letter-spacing: -.008em; line-height: 1.2; margin-bottom: 28px; }
+.scope-title { font-size: clamp(1.5rem, 2.8vw, 2.1rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 28px; }
 .scope-photo { position: relative; margin: 0 0 22px; border-radius: 18px; overflow: hidden; aspect-ratio: 4 / 5; background: #1b1b1b; }
 .scope-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
 .scope-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(10,10,10,.82) 100%); }
 .scope-photo figcaption { position: absolute; left: 24px; right: 24px; bottom: 22px; z-index: 1; color: #fff; display: flex; align-items: baseline; gap: 14px; }
-.scope-photo figcaption b { font-size: clamp(2.6rem, 5vw, 3.6rem); font-weight: 800; letter-spacing: -.012em; line-height: 1; color: var(--orange); }
+.scope-photo figcaption b { font-size: clamp(2.6rem, 5vw, 3.6rem); font-weight: 800; letter-spacing: -.03em; line-height: 1; color: var(--orange); }
 .scope-photo figcaption span { font-size: .95rem; line-height: 1.4; max-width: 18ch; }
 
 .scope-list { border-bottom: 1px solid var(--line); }
@@ -601,7 +599,7 @@ h2 {
 .scope-item::before { content: ""; position: absolute; left: 0; top: -1px; height: 2px; width: 0; background: var(--orange); transition: width .5s var(--ease); }
 .scope-item:hover::before { width: 100%; }
 .scope-num { color: var(--orange); font-size: .85rem; font-weight: 700; letter-spacing: .1em; padding-top: 8px; }
-.scope-main h3 { font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-weight: 800; letter-spacing: 0; margin-bottom: 10px; }
+.scope-main h3 { font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-weight: 800; letter-spacing: -.01em; margin-bottom: 10px; }
 .scope-main > p { color: var(--ink-2); max-width: 56ch; }
 .tagrow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 .tagrow li { padding: 6px 14px; border-radius: 999px; background: var(--soft); border: 1px solid var(--line); font-size: .8rem; font-weight: 500; color: var(--ink-2); }
@@ -621,7 +619,7 @@ h2 {
 
 .equip2 { margin-top: 80px; }
 .equip2-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 32px; }
-.equip2-head h3 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 800; letter-spacing: 0; }
+.equip2-head h3 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 800; letter-spacing: -.01em; }
 .condition { display: grid; grid-template-columns: auto 180px auto; gap: 14px; align-items: center; font-size: .88rem; color: var(--ink-2); }
 .condition b { color: var(--ink); font-weight: 800; }
 .bar { height: 10px; border-radius: 99px; background: #dcdcd7; overflow: hidden; }
@@ -650,16 +648,4 @@ h2 {
   .scope-num { padding-top: 0; }
   .eq-grid { grid-template-columns: 1fr; }
   .condition { grid-template-columns: auto 1fr auto; width: 100%; }
-}
-
-/* ---------- kiểu tiêu đề: chữ hoa, nét mảnh, giãn chữ rộng (theo mẫu) ---------- */
-.hero h1 { letter-spacing: .1em; line-height: 1.25; }
-.hero h1 .l1, .hero h1 .l3 { font-size: clamp(.95rem, 1.8vw, 1.25rem); font-weight: 400; letter-spacing: .22em; margin: 0; }
-.hero h1 .l2 { font-size: clamp(2rem, 5vw, 3.7rem); font-weight: 400; letter-spacing: .1em; color: var(--green); margin: 6px 0 8px; }
-.scope-title, .equip2-head h3 {
-  font-size: clamp(1.05rem, 1.9vw, 1.35rem); font-weight: 400; letter-spacing: .12em; text-transform: uppercase; line-height: 1.5;
-}
-@media (max-width: 640px) {
-  h2 { letter-spacing: .1em; }
-  .hero h1 .l2 { letter-spacing: .06em; }
 }
