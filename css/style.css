@@ -1477,3 +1477,15 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
 @media (max-width: 1100px) { .pj-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 800px) { .pj-grid { grid-template-columns: repeat(2, 1fr); } .pj-grid .pj-card { height: 440px; } }
 @media (max-width: 520px) { .pj-grid { grid-template-columns: 1fr; } .pj-grid .pj-card { height: 460px; } }
+
+/* v66 — trang Dự án dùng nền sáng giống các trang khác (nền trắng mờ trên ảnh nền cố định) */
+.pj-page { background: rgba(255,255,255,.94); color: var(--ink); }
+.pj-page h2, .pj-page .pj-folder-head h3 { color: var(--ink); }
+.pj-page .eyebrow { color: var(--green); }
+.pj-page .pj-folder-head p { color: var(--muted); }
+.pj-page .subnav a { background: transparent; border-color: var(--ui-green); color: var(--ui-green); }
+.pj-page .subnav a:hover { background: var(--ui-green); border-color: var(--ui-green); color: #fff; }
+.pj-page .subnav a b { opacity: .8; }
+.pj-page .pj-folder { border-top-color: var(--line); }
+.pj-page .pj-grid { gap: 0; }
+.pj-page { padding-bottom: clamp(40px, 5vw, 72px); }
