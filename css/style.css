@@ -938,3 +938,36 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
   .hero-slider .hero-actions { margin-top: 16px; }
   .hero-slider .hero-stage .hero-grid, .hero-short.hero-slider .hero-stage .hero-grid { padding: 20px 0 170px; }
 }
+
+/* =====================================================================
+   v30 — headline: bỏ khung trắng quanh chữ, dùng dải trắng mờ dần từ trái sang phải
+   (phía ảnh nhạt hơn để thấy ảnh rõ); vẫn giữ slider, chữ chủ đề, logo không nền
+   ===================================================================== */
+.hs-overlay {
+  background: linear-gradient(90deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.9) 26%, rgba(255,255,255,.4) 44%, rgba(255,255,255,0) 62%);
+}
+.hero-slider .hero-copy {
+  background: none; padding: 0; border-radius: 0; box-shadow: none; width: auto;
+  margin-left: clamp(0px, 4vw, 96px); max-width: min(820px, 100%);
+}
+.hero-logo { width: clamp(130px, 12vw, 220px); margin-bottom: 18px; }
+.hero-slider .eyebrow { margin-bottom: 22px; }
+.hero-slider h1 .l2 { font-size: clamp(2.5rem, 7vw, 6rem); }
+.hero-slider .hero-title .arrow { width: clamp(52px, 7.5vw, 104px); }
+.hero-slider .lead { margin-top: 30px; font-size: clamp(1rem, 1.25vw, 1.2rem); }
+.hero-slider .hero-actions { margin-top: 34px; }
+.hero-slider .hero-stage .hero-grid, .hero-short.hero-slider .hero-stage .hero-grid { padding: 32px 0 124px; }
+
+/* nút điều khiển nổi rõ trên dải trắng */
+.hs-btn { border: 1px solid rgba(0,0,0,.1); box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+.hs-meta { box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+
+@media (max-width: 760px) {
+  .hs-overlay { background: linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.9) 55%, rgba(255,255,255,.4) 100%); }
+  .hero-slider .hero-copy { margin-left: 0; }
+  .hero-logo { width: 100px; margin-bottom: 10px; }
+  .hero-slider .lead { font-size: .9rem; margin-top: 14px; }
+  .hero-slider .hero-actions { margin-top: 16px; }
+  .hero-slider .hero-stage .hero-grid, .hero-short.hero-slider .hero-stage .hero-grid { padding: 20px 0 170px; }
+}
+.hs-overlay { background: linear-gradient(90deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.92) 38%, rgba(255,255,255,.45) 54%, rgba(255,255,255,0) 72%); }
