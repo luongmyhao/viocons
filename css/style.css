@@ -704,3 +704,23 @@ body::before {
 .hero-short h1 .l2 { font-size: clamp(2.3rem, 5.4vw, 4.4rem); }
 .hero-short .lead { margin-top: 22px; }
 @media (max-width: 760px) { .hero-short .hero-stage { min-height: 300px; } .hero-short .hero-stage .hero-grid { padding: 36px 0; } }
+
+/* ---------- v17: chữ headline to hơn; headline trang con cao 3/4 màn hình ---------- */
+.hero-copy { max-width: min(920px, 100%); }
+.hero .eyebrow { font-size: clamp(.78rem, 1.05vw, 1rem); margin-bottom: 26px; }
+.hero-title { gap: clamp(16px, 2.2vw, 32px); }
+.hero-title .arrow { width: clamp(54px, 10vw, 140px); margin-top: clamp(6px, 1vw, 14px); }
+.hero h1 .l1 { font-size: clamp(1.1rem, 3vw, 2.5rem); margin-bottom: 10px; }
+.hero h1 .l2 { font-size: clamp(2.6rem, 9vw, 8rem); }
+.hero h1 .l3 { font-size: clamp(1.1rem, 3vw, 2.5rem); margin-top: 14px; }
+.hero .lead { font-size: clamp(1rem, 1.5vw, 1.35rem); max-width: 54ch; margin-top: 36px; line-height: 1.7; }
+.hero-actions { margin-top: 42px; gap: 16px; }
+.hero-actions .btn { padding: 18px 36px; font-size: clamp(.95rem, 1.2vw, 1.1rem); }
+
+/* trang con: cùng headline, cao 3/4 màn hình (ghi đè các mức thu nhỏ trước đó) */
+.hero-short .hero-stage { min-height: 75vh; }
+.hero-short .hero-stage .hero-grid { padding: 56px 0; }
+.hero-short .hero-title .arrow { width: clamp(54px, 10vw, 140px); }
+.hero-short h1 .l2 { font-size: clamp(2.6rem, 9vw, 8rem); }
+.hero-short .lead { margin-top: 36px; }
+@media (max-width: 760px) { .hero-short .hero-stage { min-height: 75vh; } .hero-short .hero-stage .hero-grid { padding: 44px 0; } }
