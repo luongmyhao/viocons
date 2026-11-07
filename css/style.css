@@ -1542,3 +1542,40 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
   .nav-sub { transition: opacity .25s ease .3s, transform .25s ease .3s, visibility 0s linear .55s; }
   .nav-item:hover .nav-sub, .nav-item:focus-within .nav-sub { transition: opacity .25s ease, transform .25s ease, visibility 0s; }
 }
+
+/* =====================================================================
+   v70 — trang chi tiết từng dự án
+   ===================================================================== */
+.pj-detail { padding-bottom: 0; }
+.pj-detail .crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: .88rem; color: var(--muted); margin-bottom: 32px; }
+.pj-detail .crumbs a { color: var(--muted); }
+.pj-detail .crumbs a:hover { color: var(--ui-green); }
+.pj-detail .crumbs b { color: var(--ink); font-weight: 600; }
+.dt-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(28px, 5vw, 80px); align-items: start; }
+.dt-grid[hidden], .dt-nav[hidden], .dt-gallery[hidden], .dt-missing[hidden], .dt-more[hidden] { display: none; }
+.dt-photo { margin: 0; position: sticky; top: 100px; border-radius: 20px; overflow: hidden; background: #111; box-shadow: 0 24px 60px rgba(0,0,0,.25); }
+.dt-photo img { width: 100%; max-height: 78vh; object-fit: cover; display: block; }
+.dt-badge { position: absolute; left: 18px; top: 18px; background: #fff; color: var(--ink); font-size: .78rem; font-weight: 600; padding: 6px 14px; border-radius: 999px; }
+.dt-info h2 { font-size: clamp(1.8rem, 3.4vw, 2.8rem); line-height: 1.15; margin-bottom: 10px; }
+.dt-sub { color: var(--ink-2); font-size: 1.05rem; margin-bottom: 28px; }
+.dt-list { margin: 0 0 24px; border-top: 1px solid var(--line); }
+.dt-list div { display: grid; grid-template-columns: 150px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.dt-list dt { color: var(--muted); font-size: .9rem; }
+.dt-list dd { margin: 0; font-weight: 600; }
+.dt-list dd.upd { font-weight: 400; color: var(--muted); font-style: italic; }
+.dt-desc { color: var(--ink-2); max-width: 60ch; margin-bottom: 28px; }
+.dt-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.dt-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 48px; }
+.dt-gallery img { width: 100%; border-radius: 12px; }
+.dt-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 56px; border-top: 1px solid var(--line); padding-top: 28px; }
+.dt-step { display: grid; gap: 4px; padding: 16px 20px; border-radius: 14px; border: 1.5px solid var(--line); transition: border-color .25s, background .25s; }
+.dt-step small { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; }
+.dt-step b { font-size: 1.02rem; line-height: 1.35; }
+.dt-step.next { text-align: right; }
+.dt-step:hover { border-color: var(--ui-green); background: var(--soft); }
+.dt-missing { padding: 40px 0 60px; display: grid; gap: 14px; justify-items: start; }
+.dt-more { margin-top: clamp(48px, 6vw, 88px); background: var(--ink); color: #fff; padding-top: 44px; }
+.dt-more h3 { font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 800; margin-bottom: 22px; color: #fff; }
+.dt-more .pj-grid .pj-card { height: clamp(360px, 52vh, 520px); display: block; }
+@media (max-width: 1020px) { .dt-grid { grid-template-columns: 1fr; } .dt-photo { position: static; } }
+@media (max-width: 640px) { .dt-list div { grid-template-columns: 110px 1fr; } .dt-nav { grid-template-columns: 1fr; } .dt-step.next { text-align: left; } }

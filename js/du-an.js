@@ -53,7 +53,8 @@
     });
   });
 
-  // bấm vào dự án: phóng to ảnh
+  function goDetail(i) { location.href = 'du-an-chi-tiet.html?id=' + P[i].slug; }
+  // bấm vào dự án: mở trang chi tiết (cửa sổ phóng ảnh cũ không còn dùng)
   var lb = document.createElement('div');
   lb.className = 'pj-lightbox'; lb.hidden = true;
   lb.innerHTML = '<button type="button" class="pj-close" aria-label="Đóng">×</button><figure><img alt=""><figcaption></figcaption></figure>';
@@ -66,10 +67,10 @@
     document.body.style.overflow = 'hidden';
   }
   function closeLb() { lb.classList.remove('open'); setTimeout(function () { lb.hidden = true; }, 250); document.body.style.overflow = ''; }
-  document.querySelector('.pj-page').addEventListener('click', function (e) { var c = e.target.closest('.pj-card'); if (c) openLb(+c.dataset.i); });
+  document.querySelector('.pj-page').addEventListener('click', function (e) { var c = e.target.closest('.pj-card'); if (c) goDetail(+c.dataset.i); });
   document.querySelector('.pj-page').addEventListener('keydown', function (e) {
     var c = e.target.closest('.pj-card');
-    if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openLb(+c.dataset.i); }
+    if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); goDetail(+c.dataset.i); }
   });
   lb.addEventListener('click', function (e) { if (e.target === lb || e.target.closest('.pj-close')) closeLb(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) closeLb(); });

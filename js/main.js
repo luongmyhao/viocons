@@ -34,7 +34,7 @@
         var nav = it.closest('.nav-sub'); if (!nav) return;
         nav.classList.toggle('flip', nav.getBoundingClientRect().right + 320 > window.innerWidth);
       });
-      ul.innerHTML = P.map(function (p, i) { return p.group === g ? '<li><a href="du-an.html?nhom=' + g + '#pj-' + i + '" role="menuitem"><b>' + esc2(p.name) + '</b><small>' + esc2(p.meta) + '</small></a></li>' : ''; }).join('');
+      ul.innerHTML = P.map(function (p, i) { return p.group === g ? '<li><a href="du-an-chi-tiet.html?id=' + p.slug + '" role="menuitem"><b>' + esc2(p.name) + '</b><small>' + esc2(p.meta) + '</small></a></li>' : ''; }).join('');
     });
   })();
 
@@ -351,7 +351,8 @@
   document.querySelector('.pj-prev').addEventListener('click', function () { pjStep(-1); });
   document.querySelector('.pj-next').addEventListener('click', function () { pjStep(1); });
 
-  // bấm vào dự án: phóng to ảnh
+  function goDetail(i) { location.href = 'du-an-chi-tiet.html?id=' + PROJECTS[i].slug; }
+  // bấm vào dự án: mở trang chi tiết
   var lb = document.createElement('div');
   lb.className = 'pj-lightbox'; lb.hidden = true;
   lb.innerHTML = '<button type="button" class="pj-close" aria-label="Đóng">×</button><figure><img alt=""><figcaption></figcaption></figure>';
@@ -371,10 +372,10 @@
     setTimeout(function () { lb.hidden = true; }, 250);
     document.body.style.overflow = '';
   }
-  grid.addEventListener('click', function (e) { var c = e.target.closest('.pj-card'); if (c) openLb(+c.dataset.i); });
+  grid.addEventListener('click', function (e) { var c = e.target.closest('.pj-card'); if (c) goDetail(+c.dataset.i); });
   grid.addEventListener('keydown', function (e) {
     var c = e.target.closest('.pj-card');
-    if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openLb(+c.dataset.i); }
+    if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); goDetail(+c.dataset.i); }
   });
   lb.addEventListener('click', function (e) { if (e.target === lb || e.target.closest('.pj-close')) closeLb(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) closeLb(); });
