@@ -357,3 +357,35 @@ h2 {
 /* ảnh dự án thật */
 .project .thumb img { object-position: center 35%; }
 .project .thumb { background: #e9e9e5; }
+
+/* ---------- v3: ảnh nền hero + nội dung thật trên template cũ ---------- */
+.hero { padding: 0; }
+.hero-stage { position: relative; min-height: clamp(560px, 82vh, 760px); display: flex; align-items: center; isolation: isolate; overflow: hidden; }
+.hero-bg {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(90deg, #fff 0%, #fff 30%, rgba(255,255,255,.78) 52%, rgba(255,255,255,.12) 100%),
+    url("../assets/hero.webp") center 32% / cover no-repeat;
+}
+.hero-stage .hero-grid { grid-template-columns: 1fr; padding: 72px 0; width: min(100% - 40px, var(--max)); }
+.hero-copy { max-width: 620px; }
+.stats { margin-top: 0; }
+
+.pledges.three { grid-template-columns: repeat(3, 1fr); }
+.about-p { margin-top: 22px; max-width: 56ch; color: var(--ink-2); }
+.about-p strong { color: var(--ink); }
+.est-phone { font-size: clamp(1.9rem, 4vw, 2.6rem); }
+.est-phone a { color: #fff; }
+.service h3 { line-height: 1.3; }
+
+@media (max-width: 1020px) {
+  .pledges.three { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .hero-bg {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.94) 0%, rgba(255,255,255,.86) 55%, rgba(255,255,255,.55) 100%),
+      url("../assets/hero.webp") center 30% / cover no-repeat;
+  }
+  .hero-stage .hero-grid { padding: 48px 0; }
+}
