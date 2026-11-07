@@ -62,11 +62,17 @@
     if (slides.length < 2) return;
     var idx = 0, busy = false;
     var countEl = hero.querySelector('.hs-count b');
-    var capEl = hero.querySelector('.hs-caption');
+    var tagEl = hero.querySelector('.hs-tagline');
     function pad(n) { return (n < 10 ? '0' : '') + n; }
     function label(n) {
       countEl.textContent = pad(n + 1);
-      capEl.textContent = slides[n].getAttribute('data-caption') || '';
+      if (tagEl) {
+        tagEl.classList.add('is-out');
+        setTimeout(function () {
+          tagEl.textContent = slides[n].getAttribute('data-tagline') || '';
+          tagEl.classList.remove('is-out');
+        }, 300);
+      }
     }
     function go(dir) {
       if (busy) return;
@@ -89,6 +95,12 @@
       }
       to.addEventListener('animationend', finish, { once: true });
       setTimeout(finish, 1400); // dự phòng khi người dùng tắt hiệu ứng chuyển động
+    }
+    // ẩn nút "Gọi ngay" nổi khi headline còn trên màn hình để không đè lên nút điều khiển
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        document.body.classList.toggle('hero-in-view', es[0].isIntersecting);
+      }, { threshold: 0.35 }).observe(hero);
     }
     hero.querySelectorAll('.hs-btn').forEach(function (b) {
       b.addEventListener('click', function () { go(+b.getAttribute('data-dir')); });
