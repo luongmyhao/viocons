@@ -1121,3 +1121,31 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
 
 /* logo trở về màu gốc (bỏ làm sáng) */
 .hero-logo { filter: none; }
+
+/* =====================================================================
+   v40 — headline nền trắng mờ dần (chữ tối); bỏ logo lớn; thanh tab luôn hiện, nền trắng mờ trong suốt
+   ===================================================================== */
+.hs-overlay {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.92) 38%, rgba(255,255,255,.45) 54%, rgba(255,255,255,0) 72%),
+    radial-gradient(60% 55% at 100% 100%, rgba(0,0,0,.6), rgba(0,0,0,0));
+}
+@media (max-width: 760px) {
+  .hs-overlay {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.9) 55%, rgba(255,255,255,.4) 100%),
+      radial-gradient(90% 40% at 100% 100%, rgba(0,0,0,.6), rgba(0,0,0,0));
+  }
+}
+.hero-slider .eyebrow { color: var(--muted); }
+.hero-slider .hero-title .arrow { color: var(--ink); }
+.hero-slider h1, .hero-slider .hero-title { color: var(--ink); }
+.hero-slider .lead { color: var(--ink-2); }
+.hero-slider .btn-ghost { border-color: var(--ui-green); color: var(--ui-green); background: rgba(255,255,255,.7); }
+.hero-slider .btn-ghost:hover { background: var(--ui-green); color: #fff; border-color: var(--ui-green); }
+.hero-logo { display: none; }
+
+/* thanh tab: nền trắng mờ trong suốt, thấy nội dung phía sau */
+.site-header {
+  background: rgba(255,255,255,.72); backdrop-filter: blur(12px) saturate(1.15); -webkit-backdrop-filter: blur(12px) saturate(1.15);
+}
