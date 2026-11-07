@@ -1302,3 +1302,8 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
 .pj-card.is-hover .pj-head { opacity: 0; transform: translateY(-160px); }
 .pj-card.is-hover .pj-type { opacity: 0; transform: translateY(-260px) rotate(180deg); }
 .pj-card:not(.is-hover) .pj-head, .pj-card:not(.is-hover) .pj-type { transition-timing-function: cubic-bezier(.2, .8, .2, 1); transition-duration: .7s; }
+
+/* v57 — tiêu đề dự án giữ nguyên khi rê chuột; chỉ chữ loại công trình chạy lên và biến mất, nhanh hơn */
+.pj-card.is-hover .pj-head, .pj-card:hover .pj-head, .pj-card:focus-visible .pj-head { opacity: 1; transform: none; }
+.pj-card .pj-type { transition: transform .35s cubic-bezier(.5, 0, .75, 0), opacity .3s ease-in !important; }
+.pj-card.is-hover .pj-type { opacity: 0; transform: translateY(-260px) rotate(180deg); }
