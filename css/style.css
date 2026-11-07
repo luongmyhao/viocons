@@ -1093,3 +1093,28 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
 @media (max-width: 760px) {
   .hs-tagline { left: var(--gutter); right: var(--gutter); white-space: normal; text-align: right; font-size: .85rem; letter-spacing: .2em; bottom: calc(clamp(16px, 3vh, 30px) + 44px); }
 }
+
+/* =====================================================================
+   v37 — headline nền đen (như phần Quy trình): dải đen mờ dần sang phải, chữ trắng
+   ===================================================================== */
+.hs-overlay {
+  background:
+    linear-gradient(90deg, rgba(14,14,14,.94) 0%, rgba(14,14,14,.9) 38%, rgba(14,14,14,.42) 54%, rgba(14,14,14,0) 72%),
+    radial-gradient(60% 55% at 100% 100%, rgba(0,0,0,.6), rgba(0,0,0,0));
+}
+@media (max-width: 760px) {
+  .hs-overlay {
+    background:
+      linear-gradient(180deg, rgba(14,14,14,.94) 0%, rgba(14,14,14,.9) 55%, rgba(14,14,14,.4) 100%),
+      radial-gradient(90% 40% at 100% 100%, rgba(0,0,0,.6), rgba(0,0,0,0));
+  }
+}
+.hero-slider .eyebrow { color: rgba(255,255,255,.72); }
+.hero-slider .hero-title .arrow { color: #fff; }
+.hero-slider h1, .hero-slider .hero-title { color: #fff; }
+.hero-slider .lead { color: rgba(255,255,255,.86); }
+.hero-slider .btn-ghost { border-color: rgba(255,255,255,.85); color: #fff; background: transparent; }
+.hero-slider .btn-ghost:hover { background: #fff; color: var(--ink); border-color: #fff; }
+/* logo màu tối → làm sáng để nổi trên nền đen */
+.hero-logo { filter: brightness(1.75) saturate(1.15) drop-shadow(0 0 1px rgba(255,255,255,.35)); }
+.hero-logo { filter: brightness(1.4) saturate(.95) drop-shadow(0 0 1px rgba(255,255,255,.3)); }
