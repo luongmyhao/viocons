@@ -1295,3 +1295,10 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
 .pj-card.is-hover .pj-type { opacity: 0; transform: rotate(180deg) translateY(-14px); }
 .pj-card .pj-zoom { transition: opacity .45s ease, transform .6s var(--ease) !important; }
 .pj-card.is-hover .pj-zoom { opacity: 1; transform: none; }
+
+/* v56 — chữ (tiêu đề dự án, loại công trình) chạy lên rồi biến mất khi rê chuột vào; rê đi thì chạy xuống trở lại */
+.pj-card .pj-head { transition: transform .8s cubic-bezier(.5, 0, .75, 0), opacity .8s ease-in !important; }
+.pj-card .pj-type { transform: rotate(180deg); transition: transform .8s cubic-bezier(.5, 0, .75, 0), opacity .8s ease-in !important; }
+.pj-card.is-hover .pj-head { opacity: 0; transform: translateY(-160px); }
+.pj-card.is-hover .pj-type { opacity: 0; transform: translateY(-260px) rotate(180deg); }
+.pj-card:not(.is-hover) .pj-head, .pj-card:not(.is-hover) .pj-type { transition-timing-function: cubic-bezier(.2, .8, .2, 1); transition-duration: .7s; }
