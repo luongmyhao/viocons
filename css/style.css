@@ -492,21 +492,93 @@ h2 {
 .team-stats.on-dark span { color: #a9a9a4; }
 @media (max-width: 1020px) { .team-stats.on-dark div:nth-child(n+3) { border-top-color: #2c2c2c; } }
 
-/* ---------- ảnh nền cho 6 khung dịch vụ (giữ nguyên bố cục khung cũ) ---------- */
-.service.has-photo { position: relative; overflow: hidden; isolation: isolate; color: #fff; background: #1b1b1b; border-color: #fff; }
+/* ---------- thẻ dịch vụ nền ảnh ---------- */
+.services.photos { border: 0; gap: 16px; }
+.service.has-photo {
+  position: relative; overflow: hidden; isolation: isolate; border: 0; border-radius: var(--radius);
+  min-height: 320px; padding: 30px 30px 32px; color: #fff; display: flex; flex-direction: column; justify-content: space-between;
+  background: #1b1b1b;
+}
+.service.has-photo:hover { background: #1b1b1b; color: #fff; }
 .service-bg {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;
-  transition: transform .9s var(--ease);
+  filter: grayscale(1) contrast(1.05); transition: transform .9s var(--ease), filter .6s;
 }
 .service.has-photo::after {
   content: ""; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(180deg, rgba(10,10,10,.52) 0%, rgba(10,10,10,.58) 45%, rgba(10,10,10,.78) 100%);
-  transition: background .4s;
+  background: linear-gradient(180deg, rgba(10,10,10,.10) 0%, rgba(10,10,10,.18) 38%, rgba(10,10,10,.84) 100%);
+  transition: opacity .4s;
 }
-.service.has-photo:hover { background: #1b1b1b; color: #fff; }
-.service.has-photo:hover .service-bg { transform: scale(1.06); }
-.service.has-photo:hover::after { background: linear-gradient(180deg, rgba(10,10,10,.40) 0%, rgba(10,10,10,.48) 45%, rgba(10,10,10,.72) 100%); }
+.service.has-photo:hover .service-bg { transform: scale(1.07); filter: grayscale(.15) contrast(1.05); }
+.service.has-photo .num { margin-bottom: 0; color: var(--orange); }
 .service.has-photo h3 { color: #fff; }
-.service.has-photo p, .service.has-photo:hover p { color: #e6e6e1; }
-.service.has-photo .more { color: #fff; border-bottom: 1.5px solid var(--orange); padding-bottom: 1px; }
+.service.has-photo p, .service.has-photo:hover p { color: #e4e4df; }
+.service.has-photo .more { color: #fff; margin-top: 14px; border-bottom: 1.5px solid var(--orange); padding-bottom: 1px; }
 .service.has-photo:hover .more { color: var(--orange); }
+.services.two.photos .service.has-photo { min-height: 380px; padding: 36px 36px 40px; }
+
+/* ---------- trang Dịch vụ: bố cục tròn ---------- */
+.duo { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(32px, 6vw, 88px); }
+.medal { display: grid; justify-items: start; }
+.medal-photo {
+  position: relative; width: min(300px, 78%); aspect-ratio: 1; border-radius: 50%; margin: 14px 0 34px 14px;
+}
+.medal-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; filter: grayscale(1) contrast(1.05); }
+.medal-photo::before {
+  content: ""; position: absolute; inset: -14px; border: 1.5px dashed var(--orange); border-radius: 50%; animation: spin 40s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.medal h3 { font-size: 1.5rem; font-weight: 800; letter-spacing: -.01em; margin-bottom: 20px; }
+.dots { display: grid; gap: 14px; width: 100%; }
+.dots li { display: flex; align-items: center; gap: 16px; color: var(--ink-2); }
+.dots i {
+  flex: none; width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--ink); display: grid; place-items: center;
+  font-style: normal; font-weight: 700; font-size: .85rem; transition: all .25s;
+}
+.dots li:hover i { background: var(--ink); color: #fff; }
+
+.stepper { --node-bg: var(--soft); display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 72px; position: relative; text-align: center; }
+.stepper::before { content: ""; position: absolute; top: 36px; left: 12.5%; right: 12.5%; height: 2px; background: var(--ink); opacity: .85; }
+.stepper li { position: relative; display: grid; justify-items: center; gap: 6px; padding: 0 14px; }
+.node {
+  width: 72px; height: 72px; border-radius: 50%; background: var(--node-bg); border: 2px solid var(--ink);
+  display: grid; place-items: center; font-weight: 800; font-size: 1.1rem; margin-bottom: 14px; position: relative; z-index: 1;
+  transition: background .3s, color .3s, border-color .3s;
+}
+.stepper li:hover .node { background: var(--orange); border-color: var(--orange); color: #fff; }
+.stepper b { font-size: 1.1rem; }
+.stepper small { color: var(--muted); font-size: .88rem; line-height: 1.5; max-width: 22ch; }
+.stepper.on-dark { --node-bg: var(--ink); }
+.stepper.on-dark::before { background: #fff; opacity: .5; }
+.stepper.on-dark .node { border-color: #fff; color: #fff; }
+.stepper.on-dark b { color: #fff; }
+.stepper.on-dark small { color: #a9a9a4; }
+
+.rings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 8px; }
+.ring {
+  aspect-ratio: 1; border-radius: 50%; border: 1.5px solid #3a3a3a; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 14%; transition: border-color .3s, transform .4s var(--ease), background .3s;
+}
+.ring:hover { border-color: var(--orange); transform: translateY(-6px); background: rgba(224,123,34,.06); }
+.ring .num { color: var(--orange); font-size: .8rem; font-weight: 600; letter-spacing: .1em; margin-bottom: 12px; }
+.ring h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; color: #fff; }
+.ring p { color: #a9a9a4; font-size: .92rem; line-height: 1.5; }
+.section-dark .stepper { margin-top: 80px; }
+
+@media (max-width: 1020px) {
+  .duo { grid-template-columns: 1fr; }
+  .stepper { grid-template-columns: repeat(2, 1fr); row-gap: 40px; }
+  .stepper::before { display: none; }
+}
+@media (max-width: 640px) {
+  .service.has-photo, .services.two.photos .service.has-photo { min-height: 260px; padding: 24px; }
+  .rings { grid-template-columns: 1fr; justify-items: center; }
+  .ring { width: min(100%, 320px); padding: 12%; }
+  .ring h3 { font-size: 1.15rem; }
+  .ring p { font-size: .86rem; }
+  .stepper { grid-template-columns: 1fr; }
+  .stepper li { grid-template-columns: 72px 1fr; justify-items: start; text-align: left; column-gap: 16px; align-items: center; }
+  .stepper .node { grid-row: span 2; margin-bottom: 0; }
+  .stepper small { max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) { .medal-photo::before { animation: none; } }
