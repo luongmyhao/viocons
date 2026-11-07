@@ -1355,3 +1355,22 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
 @media (max-width: 760px) {
   .hero-slider .hero-stage .hero-grid, .hero-short.hero-slider .hero-stage .hero-grid { padding-top: 92px; }
 }
+
+/* =====================================================================
+   v60 — nút liên hệ nhanh hợp giao diện (nền trắng, biểu tượng xanh; hover đổi xanh); logo thanh tab có nền trắng
+   ===================================================================== */
+.site-header .brand img { filter: none; background: #fff; padding: 6px 14px; border-radius: 14px; box-shadow: 0 4px 18px rgba(0,0,0,.16); height: 58px; width: auto; }
+.q {
+  width: 48px; height: 48px; background: #fff !important; color: var(--ui-green); box-shadow: 0 6px 20px rgba(0,0,0,.22);
+  border: 1px solid rgba(0,0,0,.06); transition: background .25s, color .25s, transform .25s var(--ease), box-shadow .25s;
+}
+.q svg { width: 22px; height: 22px; }
+.q:hover { background: var(--ui-green) !important; color: #fff; transform: scale(1.1); }
+.zalo-txt { color: var(--ui-green); font-size: .72rem; }
+.q:hover .zalo-txt { color: #fff; }
+.q-phone { background: var(--ui-green) !important; color: #fff; }
+.q-phone::before { border-color: rgba(63,122,58,.5); }
+.q-phone:hover { background: var(--orange) !important; }
+.q-top { background: var(--ink) !important; color: #fff; }
+.q-top:hover { background: var(--ui-green) !important; }
+@media (max-width: 760px) { .q { width: 40px; height: 40px; } .site-header .brand img { height: 48px; padding: 4px 10px; } }
