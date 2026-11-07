@@ -93,4 +93,5 @@
       '<span class="pj-type">' + TYPE[q.group] + '</span></a>';
   }).join('');
   $('dtMore').hidden = false;
+  if (window.vioReveal) window.vioReveal(document);
 })();

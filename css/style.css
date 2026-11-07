@@ -1599,3 +1599,20 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
 .dt-gallery { display: block; grid-template-columns: none; }
 .dt-gallery[hidden] { display: none; }
 .dt-gallery img { border-radius: 0; }
+
+
+/* =====================================================================
+   v73 — hiệu ứng hiện dần khi cuộn (luôn chạy, kể cả khi hệ điều hành bật "giảm chuyển động")
+   ===================================================================== */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s var(--ease), transform .9s var(--ease); will-change: opacity, transform; }
+.reveal.reveal-zoom { transform: translateY(24px) scale(.94); }
+.reveal.reveal-right { transform: translateX(50px); }
+.reveal.in { opacity: 1; transform: none; will-change: auto; }
+.no-js .reveal { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s var(--ease), transform .9s var(--ease) !important; }
+  .reveal.reveal-zoom { transform: translateY(24px) scale(.94); }
+  .reveal.reveal-right { transform: translateX(50px); }
+  .reveal.in { opacity: 1; transform: none; }
+}
+@media (max-width: 760px) { .reveal { transform: translateY(26px); } .reveal.reveal-right { transform: translateY(26px); } }

@@ -21,6 +21,7 @@
   document.getElementById('cntCong').textContent = '(' + nCong + ')';
 
 
+  if (window.vioReveal) { window.vioReveal(gDan); window.vioReveal(gCong); }
   // mỗi tab dự án con chỉ hiện công trình của nhóm đó (?nhom=dan-dung | cong-cong); không có tham số = tất cả
   var nhom = new URLSearchParams(location.search).get('nhom');
   if (nhom !== 'dan-dung' && nhom !== 'cong-cong') nhom = '';

@@ -40,21 +40,55 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  /* ---- reveal on scroll ---- */
-  var revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    revealEls.forEach(function (el, i) {
-      el.style.transitionDelay = (i % 4) * 70 + 'ms';
-      io.observe(el);
-    });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add('in'); });
+  /* ---- hiệu ứng hiện dần khi cuộn: áp dụng cho hầu hết thành phần của trang ---- */
+  var REVEAL_SEL = [
+    '.section-head', '.section > .container > header', '.pj-folder-head', '.dt-info', '.dt-photo', '.dt-nav', '.dt-gallery h3', '.dt-more h3',
+    '.service', '.steps li', '.stat', '.pledge', '.offer', '.faq details', '.team-stats > div', '.pillar', '.eq-card', '.scope-item', '.scope-aside',
+    '.ring', '.medal', '.panel', '.flow li', '.stepper li', '.estimate', '.calc', '.tech', '.equip2-head', '.about-copy', '.member', '.value',
+    '.pj-card', '.dt-thumb', '.dt-step', '.cta-inner', '.ft-brand', '.ft-info', '.ft-form', '.tagrow', '.proj-line', '.quote'
+  ].join(',');
+  var ZOOM_SEL = '.pj-card, .dt-thumb, .dt-photo, .scope-photo, .medal-photo, .member .photo';
+  var pending = [];
+  function showEl(el, n) {
+    if (el.classList.contains('in')) return;
+    el.style.transitionDelay = Math.min(n, 6) * 90 + 'ms';
+    el.classList.add('in');
+    setTimeout(function () { el.style.transitionDelay = ''; }, 1500); // bỏ độ trễ để hiệu ứng rê chuột không bị chậm
   }
+  // kiểm tra theo vị trí cuộn (dự phòng khi IntersectionObserver không chạy)
+  var checking = false;
+  function checkReveal() {
+    checking = false;
+    var vh = window.innerHeight || 800, n = 0, rest = [];
+    pending.forEach(function (el) {
+      if (el.classList.contains('in')) return;
+      var r = el.getBoundingClientRect();
+      if (r.height === 0 && r.width === 0) { rest.push(el); return; }
+      if (r.top < vh - 40 && r.bottom > 0) showEl(el, n++); else rest.push(el);
+    });
+    pending = rest;
+  }
+  function scheduleCheck() { if (!checking) { checking = true; setTimeout(checkReveal, 50); } }
+  window.addEventListener('scroll', scheduleCheck, { passive: true });
+  window.addEventListener('resize', scheduleCheck);
+  window.addEventListener('load', scheduleCheck);
+
+  window.vioReveal = function (scope) {
+    scope = scope || document;
+    var list = [].slice.call(scope.querySelectorAll(REVEAL_SEL));
+    if (scope.matches && scope.matches(REVEAL_SEL)) list.push(scope);
+    list.forEach(function (el) {
+      if (el.closest('.hero') || el.closest('.site-header') || el.dataset.vioRev) return;
+      el.dataset.vioRev = '1';
+      el.classList.add('reveal');
+      if (el.matches(ZOOM_SEL)) el.classList.add('reveal-zoom');
+      else if (el.matches('.dt-info, .scope-aside')) el.classList.add('reveal-right');
+      pending.push(el);
+    });
+    [].forEach.call(scope.querySelectorAll('.reveal'), function (el) { if (!el.classList.contains('in') && pending.indexOf(el) < 0) pending.push(el); });
+    scheduleCheck();
+  };
+  window.vioReveal(document);
 
   /* ---- animated counters ---- */
   var counters = document.querySelectorAll('[data-count]');
@@ -311,6 +345,7 @@
     grid.scrollTo({ left: 0 });
   });
 
+  if (window.vioReveal) window.vioReveal(grid);
   // rê chuột: ảnh zoom từ từ liên tục cho đến khi rê đi, rồi nhỏ dần lại; chữ biến mất (không phụ thuộc :hover / giảm chuyển động)
   grid.querySelectorAll('.pj-card').forEach(function (card) {
     var img = card.querySelector('.pj-img'), zoomAnim = null;
