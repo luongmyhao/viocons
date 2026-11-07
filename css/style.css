@@ -681,3 +681,18 @@ body::before {
 /* ô cửa ảnh: để lộ ảnh nền cố định giữa các phần */
 .photo-band { height: clamp(180px, 34vh, 380px); }
 @media (max-width: 640px) { .photo-band { height: 140px; } }
+
+/* ---------- tiêu đề gọn cho các trang con (thay phần headline lớn của trang chủ) ---------- */
+.page-hero { position: relative; isolation: isolate; overflow: hidden; padding: clamp(48px, 7vw, 96px) 0 clamp(40px, 5vw, 72px); }
+.page-hero-bg {
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(90deg, rgba(255,255,255,.97) 0%, rgba(255,255,255,.9) 42%, rgba(255,255,255,.3) 100%),
+              url("../assets/hero.webp") center 38% / cover no-repeat;
+}
+.crumbs { display: flex; align-items: center; gap: 10px; font-size: .85rem; color: var(--muted); margin-bottom: 18px; }
+.crumbs a { color: var(--muted); transition: color .2s; }
+.crumbs a:hover { color: var(--orange); }
+.crumbs b { color: var(--ink); font-weight: 600; }
+.page-hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+.page-hero h1::after { content: ""; display: block; width: 56px; height: 4px; background: var(--orange); margin-top: 20px; }
+.page-lead { margin-top: 20px; max-width: 56ch; color: var(--ink-2); font-size: 1.05rem; }
