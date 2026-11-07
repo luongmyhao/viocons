@@ -1155,3 +1155,10 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
   .hs-tagline .ch:not(.ch-static) { animation: chBurst .8s cubic-bezier(.2, .9, .2, 1) both !important; animation-delay: calc(var(--i) * 40ms) !important; }
   .hs-tagline { transition: opacity .3s ease !important; }
 }
+
+/* hình cũ đè lên trên hình mới khi đang phóng to và mờ dần */
+.hs-slide.is-leaving { z-index: 3; }
+.hs-slide.is-entering { z-index: 2; }
+
+/* bỏ lớp làm nét SVG (nặng, làm hiệu ứng chuyển ảnh bị khựng); giữ độ tối và tương phản */
+.hs-slide { filter: brightness(.78) contrast(1.14) saturate(.92); will-change: opacity, transform; }
