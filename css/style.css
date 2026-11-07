@@ -1118,3 +1118,6 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
 /* logo màu tối → làm sáng để nổi trên nền đen */
 .hero-logo { filter: brightness(1.75) saturate(1.15) drop-shadow(0 0 1px rgba(255,255,255,.35)); }
 .hero-logo { filter: brightness(1.4) saturate(.95) drop-shadow(0 0 1px rgba(255,255,255,.3)); }
+
+/* logo trở về màu gốc (bỏ làm sáng) */
+.hero-logo { filter: none; }
