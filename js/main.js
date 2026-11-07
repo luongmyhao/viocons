@@ -70,7 +70,7 @@
     var stage = hero.querySelector('.hero-stage');
     var dots = [].slice.call(hero.querySelectorAll('.hs-dot'));
     var idx = 0, busy = false, timer = null, heroVisible = true;
-    var AUTO_MS = 200, DUR = 1000; // tự đổi: nghỉ 0,2 giây sau khi hình trước bung xong
+    var AUTO_MS = 200, DUR = 500; // tự đổi: nghỉ 0,2 giây sau khi hình trước bung xong
     var reduced = false; // luôn tự chuyển và có hiệu ứng, kể cả khi hệ điều hành bật 'giảm chuyển động'
     var tagEl = hero.querySelector('.hs-tagline');
     var nextBtn = hero.querySelector('.hs-btn[data-dir="1"]');
@@ -141,15 +141,11 @@
 
       if (reduced || !to.animate) { finish(); return; }
 
-      // hình mới bung tròn từ chính nút / chấm vừa bấm (hoặc nút "sau" khi tự chuyển)
-      var o = originOf(originEl || nextBtn);
+      // hiệu ứng Fade: hình mới mờ dần hiện lên phủ lên hình cũ (hình cũ khuất dần), 0,5 giây
       to.classList.add('is-entering');
       var anim = to.animate(
-        [
-          { clipPath: 'circle(0px at ' + o.x + 'px ' + o.y + 'px)' },
-          { clipPath: 'circle(150vmax at ' + o.x + 'px ' + o.y + 'px)' }
-        ],
-        { duration: DUR, easing: 'cubic-bezier(.77, 0, .18, 1)', fill: 'both' }
+        [{ opacity: 0 }, { opacity: 1 }],
+        { duration: DUR, easing: 'ease-in-out', fill: 'both' }
       );
       anim.onfinish = function () { try { anim.cancel(); } catch (e) {} finish(); };
       setTimeout(finish, DUR + 400); // dự phòng
