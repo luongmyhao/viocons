@@ -984,3 +984,38 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
   .page-home .hero-stage { min-height: 100vh; }
   html.no-js .page-home.at-top .site-header { transform: none; opacity: 1; pointer-events: auto; }
 }
+
+/* =====================================================================
+   v33 — chữ chủ đề dọc bên trái; hình bung tròn; chữ bung từng ký tự; nút Xem dự án như ban đầu
+   ===================================================================== */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.hs-slide.is-entering { visibility: visible; z-index: 2; }
+.hs-controls { justify-content: flex-start; }
+
+/* chữ chủ đề: dọc theo cạnh trái, đọc từ dưới lên (kiểu PS Concept) */
+.hs-tagline {
+  position: absolute; z-index: 5; left: calc(var(--gutter) - 2px); right: auto; top: 50%; bottom: auto; max-width: none;
+  transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl;
+  background: none; box-shadow: none; padding: 0; border-radius: 0; text-align: center; white-space: nowrap;
+  color: var(--ink); font-weight: 600; text-transform: uppercase; font-size: clamp(.8rem, 1.05vw, 1rem); letter-spacing: .42em;
+  transition: opacity .3s ease;
+}
+.hs-tagline.is-out { opacity: 0; transform: translateY(-50%) rotate(180deg); letter-spacing: .42em; }
+.hs-tagline .ch { display: inline-block; animation: chBurst .8s cubic-bezier(.2, .9, .2, 1) both; animation-delay: calc(var(--i) * 40ms); }
+.hs-tagline .ch-static { animation: none; }
+@keyframes chBurst {
+  from { opacity: 0; transform: scale(.2) translateY(-18px); filter: blur(6px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
+}
+/* chừa chỗ cho dải chữ dọc bên trái */
+.hero-slider .hero-copy { margin-left: clamp(36px, 5vw, 100px); }
+
+@media (max-width: 760px) {
+  .hs-tagline {
+    writing-mode: horizontal-tb; transform: none; left: var(--gutter); right: var(--gutter); top: auto;
+    bottom: calc(clamp(18px, 4vh, 40px) + 72px); text-align: left; font-size: .85rem; letter-spacing: .2em; white-space: normal;
+  }
+  .hs-tagline.is-out { transform: none; }
+  .hero-slider .hero-copy { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .hs-tagline .ch { animation: none; } }

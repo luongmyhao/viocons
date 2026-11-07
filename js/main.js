@@ -61,56 +61,96 @@
     window.addEventListener('scroll', updateTop, { passive: true });
   }
 
-  /* ---- hero slider: nút trái/phải, hình "bung" ra toàn khung ---- */
+  /* ---- hero slider: hình "bung" tròn từ nút bấm + chữ bung từng ký tự; tự chuyển hoặc bấm nút ---- */
   (function () {
     var hero = document.querySelector('.hero-slider');
     if (!hero) return;
     var slides = [].slice.call(hero.querySelectorAll('.hs-slide'));
     if (slides.length < 2) return;
-    var idx = 0, busy = false;
+    var stage = hero.querySelector('.hero-stage');
+    var idx = 0, busy = false, timer = null, heroVisible = true;
+    var AUTO_MS = 7000, DUR = 1200;
+    var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     var countEl = hero.querySelector('.hs-count b');
     var tagEl = hero.querySelector('.hs-tagline');
+    var nextBtn = hero.querySelector('.hs-btn[data-dir="1"]');
+    var prevBtn = hero.querySelector('.hs-btn[data-dir="-1"]');
     function pad(n) { return (n < 10 ? '0' : '') + n; }
-    function label(n) {
-      countEl.textContent = pad(n + 1);
-      if (tagEl) {
-        tagEl.classList.add('is-out');
-        setTimeout(function () {
-          tagEl.textContent = slides[n].getAttribute('data-tagline') || '';
-          tagEl.classList.remove('is-out');
-        }, 300);
-      }
+
+    // chữ chủ đề: tách thành từng ký tự để "bung" lần lượt
+    function renderTagline(text, animate) {
+      if (!tagEl) return;
+      tagEl.setAttribute('aria-label', text);
+      tagEl.textContent = '';
+      Array.from(text).forEach(function (c, i) {
+        var sp = document.createElement('span');
+        sp.className = animate ? 'ch' : 'ch ch-static';
+        sp.setAttribute('aria-hidden', 'true');
+        sp.style.setProperty('--i', i);
+        sp.textContent = c === ' ' ? '\u00a0' : c;
+        tagEl.appendChild(sp);
+      });
     }
-    function go(dir) {
+    renderTagline(slides[0].getAttribute('data-tagline') || '', true);
+
+    function originOf(btn) {
+      var s = stage.getBoundingClientRect(), r = btn.getBoundingClientRect();
+      return { x: r.left + r.width / 2 - s.left, y: r.top + r.height / 2 - s.top };
+    }
+
+    function schedule() {
+      clearTimeout(timer);
+      if (reduced || !heroVisible || document.hidden) return;
+      timer = setTimeout(function () { go(1, nextBtn); }, AUTO_MS);
+    }
+
+    function go(dir, originBtn) {
       if (busy) return;
       var next = (idx + dir + slides.length) % slides.length;
       var from = slides[idx], to = slides[next];
       busy = true;
-      // hình mới bung ra từ phía nút vừa bấm
-      to.classList.remove('from-left', 'from-right');
-      to.classList.add('is-entering', dir > 0 ? 'from-right' : 'from-left');
-      label(next);
+      clearTimeout(timer);
+      countEl.textContent = pad(next + 1);
+
       var done = false;
       function finish() {
         if (done) return;
         done = true;
         from.classList.remove('is-active');
-        to.classList.remove('is-entering', 'from-left', 'from-right');
+        to.classList.remove('is-entering');
         to.classList.add('is-active');
         idx = next;
         busy = false;
+        schedule();
       }
-      to.addEventListener('animationend', finish, { once: true });
-      setTimeout(finish, 1400); // dự phòng khi người dùng tắt hiệu ứng chuyển động
+
+      // chữ cũ mờ đi, chữ mới bung ra từng ký tự
+      if (tagEl) {
+        tagEl.classList.add('is-out');
+        setTimeout(function () {
+          renderTagline(to.getAttribute('data-tagline') || '', !reduced);
+          tagEl.classList.remove('is-out');
+        }, reduced ? 0 : 320);
+      }
+
+      if (reduced || !to.animate) { finish(); return; }
+
+      // hình mới bung tròn từ chính nút vừa bấm (hoặc nút "sau" khi tự chuyển)
+      var o = originOf(originBtn || nextBtn);
+      to.classList.add('is-entering');
+      var anim = to.animate(
+        [
+          { clipPath: 'circle(0px at ' + o.x + 'px ' + o.y + 'px)' },
+          { clipPath: 'circle(150vmax at ' + o.x + 'px ' + o.y + 'px)' }
+        ],
+        { duration: DUR, easing: 'cubic-bezier(.77, 0, .18, 1)', fill: 'both' }
+      );
+      anim.onfinish = function () { try { anim.cancel(); } catch (e) {} finish(); };
+      setTimeout(finish, DUR + 400); // dự phòng
     }
-    // ẩn nút "Gọi ngay" nổi khi headline còn trên màn hình để không đè lên nút điều khiển
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) {
-        document.body.classList.toggle('hero-in-view', es[0].isIntersecting);
-      }, { threshold: 0.35 }).observe(hero);
-    }
+
     hero.querySelectorAll('.hs-btn').forEach(function (b) {
-      b.addEventListener('click', function () { go(+b.getAttribute('data-dir')); });
+      b.addEventListener('click', function () { go(+b.getAttribute('data-dir'), b); });
     });
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
@@ -118,7 +158,7 @@
       if (/INPUT|TEXTAREA|SELECT/.test(tag)) return;
       var r = hero.getBoundingClientRect();
       if (r.bottom < innerHeight * 0.4 || r.top > innerHeight * 0.6) return;
-      go(e.key === 'ArrowRight' ? 1 : -1);
+      go(e.key === 'ArrowRight' ? 1 : -1, e.key === 'ArrowRight' ? nextBtn : prevBtn);
     });
     // vuốt ngang trên điện thoại
     var x0 = null;
@@ -126,8 +166,19 @@
     hero.addEventListener('touchend', function (e) {
       if (x0 === null) return;
       var dx = e.changedTouches[0].clientX - x0; x0 = null;
-      if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+      if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1, dx < 0 ? nextBtn : prevBtn);
     }, { passive: true });
+
+    // tự chuyển khi headline đang trên màn hình; tạm dừng khi cuộn đi hoặc chuyển tab
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        heroVisible = es[0].isIntersecting;
+        document.body.classList.toggle('hero-in-view', heroVisible);
+        if (heroVisible) schedule(); else clearTimeout(timer);
+      }, { threshold: 0.35 }).observe(hero);
+    }
+    document.addEventListener('visibilitychange', function () { if (document.hidden) clearTimeout(timer); else schedule(); });
+    schedule();
   })();
 
   // Các khối dưới đây chỉ chạy trên trang chủ (trang Giới thiệu không có dự án / form)
