@@ -1374,3 +1374,24 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
 .q-top { background: var(--ink) !important; color: #fff; }
 .q-top:hover { background: var(--ui-green) !important; }
 @media (max-width: 760px) { .q { width: 40px; height: 40px; } .site-header .brand img { height: 48px; padding: 4px 10px; } }
+
+/* =====================================================================
+   v61 — Liên hệ liền một khối với chân trang (cùng nền đen, không ngăn cách); sửa dòng bản quyền
+   ===================================================================== */
+.contact { background: rgba(14,14,14,.97); color: #fff; padding-bottom: clamp(48px, 6vw, 80px); }
+.contact h2 { color: #fff; }
+.contact .eyebrow { color: rgba(255,255,255,.7); }
+.contact .sub { color: rgba(255,255,255,.75); }
+.contact .contact-list li { border-top-color: rgba(255,255,255,.14); }
+.contact .contact-list li:last-child { border-bottom-color: rgba(255,255,255,.14); }
+.contact .contact-list span { color: rgba(255,255,255,.6); }
+.contact .contact-list li { color: rgba(255,255,255,.92); }
+.contact .contact-list a { color: #fff; }
+.contact .contact-list a:hover { color: var(--orange); }
+.contact .socials { display: flex; }
+.contact .form { box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+.contact .form-msg { color: var(--green-d); }
+.site-footer { background: rgba(14,14,14,.97); border-top: 0; padding-top: 0; }
+.site-footer .footer-grid { border-top: 1px solid rgba(255,255,255,.14); padding-top: 56px; }
+.site-footer .copyright span, .copyright span { display: inline; padding: 0; }
+.copyright { padding: 22px 0 26px; }
