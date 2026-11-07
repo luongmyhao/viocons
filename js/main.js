@@ -200,6 +200,33 @@
     schedule();
   })();
 
+  /* ---- form liên hệ ở chân trang (chạy trên mọi trang; site tĩnh nên mở ứng dụng email với nội dung điền sẵn) ---- */
+  (function () {
+    var form = document.getElementById('contactForm');
+    if (!form) return;
+    var msg = document.getElementById('formMsg');
+    var TO = 'xaydungviocons@gmail.com';
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var d = new FormData(form);
+      var name = (d.get('name') || '').trim(), phone = (d.get('phone') || '').trim();
+      form.querySelectorAll('.field').forEach(function (f) { f.classList.remove('invalid'); });
+      var bad = [];
+      if (!name) bad.push('name');
+      if (!/^[0-9+\s().-]{8,15}$/.test(phone)) bad.push('phone');
+      if (bad.length) {
+        bad.forEach(function (n) { form.querySelector('[name="' + n + '"]').closest('.field').classList.add('invalid'); });
+        msg.className = 'form-msg err';
+        msg.textContent = 'Vui lòng nhập họ tên và số điện thoại hợp lệ.';
+        return;
+      }
+      var body = 'Họ tên: ' + name + '\nSĐT: ' + phone + '\nNhu cầu: ' + d.get('need') + '\nNội dung: ' + (d.get('note') || '—');
+      msg.className = 'form-msg';
+      msg.textContent = 'Cảm ơn bạn! Ứng dụng email sẽ mở để gửi yêu cầu — hoặc gọi hotline 0979.001.455.';
+      window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent('Yêu cầu tư vấn từ ' + name) + '&body=' + encodeURIComponent(body);
+    });
+  })();
+
   // Các khối dưới đây chỉ chạy trên trang chủ (trang Giới thiệu không có dự án / form)
   if (!document.getElementById('projects')) return;
 
@@ -426,27 +453,4 @@
     window.location.href = 'mailto:xaydungviocons@gmail.com?subject=' + encodeURIComponent('Đăng ký dự toán - ' + phone) + '&body=' + encodeURIComponent(body);
   });
 
-  /* ---- contact form (site tĩnh: mở ứng dụng mail với nội dung điền sẵn) ---- */
-  var form = document.getElementById('contactForm');
-  var msg = document.getElementById('formMsg');
-  var TO = 'xaydungviocons@gmail.com';
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var d = new FormData(form);
-    var name = (d.get('name') || '').trim(), phone = (d.get('phone') || '').trim();
-    form.querySelectorAll('.field').forEach(function (f) { f.classList.remove('invalid'); });
-    var bad = [];
-    if (!name) bad.push('name');
-    if (!/^[0-9+\s().-]{8,15}$/.test(phone)) bad.push('phone');
-    if (bad.length) {
-      bad.forEach(function (n) { form.querySelector('[name="' + n + '"]').closest('.field').classList.add('invalid'); });
-      msg.className = 'form-msg err';
-      msg.textContent = 'Vui lòng nhập họ tên và số điện thoại hợp lệ.';
-      return;
-    }
-    var body = 'Họ tên: ' + name + '\nSĐT: ' + phone + '\nNhu cầu: ' + d.get('need') + '\nNội dung: ' + (d.get('note') || '—');
-    msg.className = 'form-msg';
-    msg.textContent = 'Cảm ơn bạn! Ứng dụng email sẽ mở để gửi yêu cầu — hoặc gọi hotline 0979.001.455 để được hỗ trợ ngay.';
-    window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent('Yêu cầu tư vấn từ ' + name) + '&body=' + encodeURIComponent(body);
-  });
 })();

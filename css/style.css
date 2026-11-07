@@ -1395,3 +1395,46 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
 .site-footer .footer-grid { border-top: 1px solid rgba(255,255,255,.14); padding-top: 56px; }
 .site-footer .copyright span, .copyright span { display: inline; padding: 0; }
 .copyright { padding: 22px 0 26px; }
+
+/* =====================================================================
+   v62 — chân trang gọn, đã gồm liên hệ (có trên mọi trang): thông tin + form nhỏ, không lặp lại
+   ===================================================================== */
+.site-footer { background: rgba(14,14,14,.97); color: rgba(255,255,255,.85); padding: 44px 0 0; border-top: 0; }
+.site-footer .ft-grid { display: grid; grid-template-columns: .9fr 1.25fr 1.15fr; gap: clamp(24px, 4vw, 64px); align-items: start; padding-bottom: 32px; border-top: 0; }
+.site-footer h4 { color: #fff; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 14px; }
+.ft-brand .foot-logo { height: 46px; width: auto; background: #fff; padding: 5px 10px; border-radius: 10px; margin-bottom: 14px; }
+.ft-brand .foot-name { font-size: .78rem; font-weight: 700; letter-spacing: .03em; color: #fff; line-height: 1.5; margin: 0 0 4px; }
+.ft-brand .ft-slogan { font-size: .85rem; color: var(--orange); margin: 0; text-transform: uppercase; letter-spacing: .14em; }
+.ft-info ul { display: grid; gap: 8px; font-size: .88rem; line-height: 1.5; }
+.ft-info li { display: grid; grid-template-columns: 84px 1fr; gap: 10px; }
+.ft-info li > span { color: rgba(255,255,255,.5); font-size: .78rem; padding-top: 1px; }
+.site-footer .ft-info a { color: #fff; display: inline; padding: 0; font-size: inherit; }
+.site-footer .ft-info a:hover { color: var(--orange); }
+
+.ft-form { display: grid; gap: 10px; }
+.ft-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ft-form .field { gap: 4px; }
+.ft-form .field > span { color: rgba(255,255,255,.6); font-size: .74rem; font-weight: 500; display: block; padding: 0; }
+.ft-form input, .ft-form select {
+  padding: 9px 12px; font-size: .88rem; border-radius: 8px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.07); color: #fff;
+}
+.ft-form input::placeholder { color: rgba(255,255,255,.38); }
+.ft-form select option { color: #111; }
+.ft-form input:focus, .ft-form select:focus { outline: none; border-color: var(--ui-green); box-shadow: 0 0 0 3px rgba(63,122,58,.35); background: rgba(255,255,255,.1); }
+.ft-form .field.invalid input { border-color: #e5604f; }
+.ft-form .btn { padding: 10px 22px; font-size: .88rem; justify-self: start; }
+.ft-form .form-msg { text-align: left; font-size: .8rem; min-height: 1.2em; margin: 0; color: #9fd29a; }
+.ft-form .form-msg.err { color: #ff9b8b; }
+
+.site-footer .copyright { border-top: 1px solid rgba(255,255,255,.12); padding: 14px 0 18px; font-size: .8rem; color: rgba(255,255,255,.5); }
+.site-footer .copyright span { display: inline; padding: 0; }
+
+@media (max-width: 1020px) { .site-footer .ft-grid { grid-template-columns: 1fr 1fr; } .ft-form { grid-column: 1 / -1; } }
+@media (max-width: 640px) {
+  .site-footer .ft-grid { grid-template-columns: 1fr; }
+  .ft-row { grid-template-columns: 1fr; }
+  .ft-info li { grid-template-columns: 78px 1fr; }
+}
+/* chừa chỗ cho cụm nút liên hệ nhanh bên phải */
+.site-footer .ft-grid, .site-footer .copyright { padding-right: 68px; box-sizing: border-box; }
+@media (max-width: 760px) { .site-footer .ft-grid, .site-footer .copyright { padding-right: 52px; } }

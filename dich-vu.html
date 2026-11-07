@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/hero.webp">
-  <link rel="stylesheet" href="css/style.css?v=61">
+  <link rel="stylesheet" href="css/style.css?v=64">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="hs-sharpen" color-interpolation-filters="sRGB"><feConvolveMatrix order="3" kernelMatrix="0 -0.6 0  -0.6 3.4 -0.6  0 -0.6 0" preserveAlpha="true"/></filter></svg>
@@ -32,7 +32,7 @@
       <a href="index.html#du-an">Dự án</a>
       <a href="index.html#du-toan">Dự toán</a>
       <a href="index.html#faq">Hỏi đáp</a>
-      <a href="index.html#lien-he">Liên hệ</a>
+      <a href="#lien-he">Liên hệ</a>
     </nav>
     <button class="menu-btn" id="menuBtn" aria-label="Mở menu" aria-expanded="false" aria-controls="nav">
       <span></span><span></span>
@@ -379,36 +379,58 @@
     </div>
     <div class="cta-actions">
       <a href="tel:0979001455" class="btn btn-light">Gọi 0979.001.455</a>
-      <a href="index.html#lien-he" class="btn btn-outline-light">Gửi yêu cầu tư vấn</a>
+      <a href="#lien-he" class="btn btn-outline-light">Gửi yêu cầu tư vấn</a>
     </div>
   </div>
 </section>
 
 </main>
 
-<!-- ============ FOOTER ============ -->
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div>
-      <img src="assets/logo.png" alt="VIOCONS" height="52" class="foot-logo">
+<!-- ============ CHÂN TRANG (gồm liên hệ) ============ -->
+<footer class="site-footer" id="lien-he">
+  <div class="container ft-grid">
+    <div class="ft-brand">
+      <img src="assets/logo.png" alt="VIOCONS" class="foot-logo">
       <p class="foot-name">CÔNG TY TNHH THƯƠNG MẠI XÂY DỰNG VIOCONS</p>
-      <p>AN TÂM ĐỒNG HÀNH</p>
+      <p class="ft-slogan">An tâm đồng hành</p>
     </div>
-    <div>
-      <h4>Khám phá</h4>
-      <a href="dich-vu.html">Dịch vụ</a>
-      <a href="index.html#quy-trinh">Quy trình</a>
-      <a href="index.html#du-an">Dự án</a>
-      <a href="index.html#lien-he">Liên hệ</a>
-    </div>
-    <div>
+
+    <div class="ft-info">
       <h4>Liên hệ</h4>
-      <a href="tel:0979001455">0979.001.455</a>
-      <a href="tel:0981874990">0981.874.990</a>
-      <a href="mailto:xaydungviocons@gmail.com">xaydungviocons@gmail.com</a>
-      <a href="https://www.facebook.com/xaydungviocons/" target="_blank" rel="noopener">Facebook</a>
-      <a href="https://zalo.me/2561762295819266198" target="_blank" rel="noopener">Zalo</a>
+      <ul>
+        <li><span>Hotline</span><div><a href="tel:0979001455">0979.001.455</a> · <a href="tel:0981874990">0981.874.990</a></div></li>
+        <li><span>Email</span><div><a href="mailto:xaydungviocons@gmail.com">xaydungviocons@gmail.com</a></div></li>
+        <li><span>Trụ sở</span><div>F3/31F, Ấp 69, Xã Vĩnh Lộc, TP. Hồ Chí Minh</div></li>
+        <li><span>VP đại diện</span><div>160 Nguyễn Tất Thành, Thôn Đăk Mâm, Xã Krông Nô, Lâm Đồng</div></li>
+        <li><span>Mạng xã hội</span><div><a href="https://www.facebook.com/xaydungviocons/" target="_blank" rel="noopener">Facebook</a> · <a href="https://zalo.me/2561762295819266198" target="_blank" rel="noopener">Zalo</a></div></li>
+      </ul>
     </div>
+
+    <form class="ft-form" id="contactForm" novalidate>
+      <h4>Gửi yêu cầu tư vấn</h4>
+      <div class="ft-row">
+        <label class="field"><span>Họ và tên</span>
+          <input type="text" name="name" required autocomplete="name" placeholder="Nguyễn Văn A">
+        </label>
+        <label class="field"><span>Số điện thoại</span>
+          <input type="tel" name="phone" required autocomplete="tel" inputmode="tel" placeholder="09xx xxx xxx">
+        </label>
+      </div>
+      <div class="ft-row">
+        <label class="field"><span>Nhu cầu</span>
+          <select name="need">
+            <option>Tư vấn – Thiết kế</option>
+            <option>Thi công xây dựng</option>
+            <option>Khác</option>
+          </select>
+        </label>
+        <label class="field"><span>Nội dung</span>
+          <input type="text" name="note" placeholder="Địa điểm, quy mô, ý tưởng…">
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary">Gửi</button>
+      <p class="form-msg" id="formMsg" role="status"></p>
+    </form>
   </div>
   <div class="container copyright">© <span id="year"></span> VIOCONS CO., LTD. Bảo lưu mọi quyền.</div>
 </footer>
@@ -422,6 +444,6 @@
   <button class="q q-top" type="button" id="toTop" aria-label="Lên đầu trang" title="Lên đầu trang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 </aside>
 
-<script src="js/main.js?v=61"></script>
+<script src="js/main.js?v=64"></script>
 </body>
 </html>
