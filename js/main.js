@@ -54,6 +54,9 @@
     counters.forEach(function (c) { c.textContent = c.dataset.count + (c.dataset.suffix || ''); });
   }
 
+  // Các khối dưới đây chỉ chạy trên trang chủ (trang Giới thiệu không có dự án / form)
+  if (!document.getElementById('projects')) return;
+
   /* ---- projects (nguồn: xaydungviocons.com.vn) ---- */
   // group: dan-dung | cong-cong · kind: school | road | water | house
   // Thêm ảnh thật: đặt file vào assets/projects/ và thêm  img: 'assets/projects/ten-file.jpg'
