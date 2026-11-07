@@ -70,8 +70,8 @@
     var stage = hero.querySelector('.hero-stage');
     var dots = [].slice.call(hero.querySelectorAll('.hs-dot'));
     var idx = 0, busy = false, timer = null, heroVisible = true;
-    var AUTO_MS = 1000, DUR = 1000; // tự đổi sau 1 giây (tính từ lúc hình trước bung xong)
-    var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var AUTO_MS = 200, DUR = 1000; // tự đổi: nghỉ 0,2 giây sau khi hình trước bung xong
+    var reduced = false; // luôn tự chuyển và có hiệu ứng, kể cả khi hệ điều hành bật 'giảm chuyển động'
     var tagEl = hero.querySelector('.hs-tagline');
     var nextBtn = hero.querySelector('.hs-btn[data-dir="1"]');
     var prevBtn = hero.querySelector('.hs-btn[data-dir="-1"]');
