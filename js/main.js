@@ -70,7 +70,7 @@
     var stage = hero.querySelector('.hero-stage');
     var dots = [].slice.call(hero.querySelectorAll('.hs-dot'));
     var idx = 0, busy = false, timer = null, heroVisible = true;
-    var DUR = 2500, CYCLE = 10000, AUTO_MS = CYCLE - DUR; // tự đổi: nghỉ 0,2 giây sau khi hình trước bung xong
+    var DUR = 2500, CYCLE = 5000, AUTO_MS = CYCLE - DUR; // tự đổi: nghỉ 0,2 giây sau khi hình trước bung xong
     var reduced = false; // luôn tự chuyển và có hiệu ứng, kể cả khi hệ điều hành bật 'giảm chuyển động'
     var tagEl = hero.querySelector('.hs-tagline');
     var nextBtn = hero.querySelector('.hs-btn[data-dir="1"]');
@@ -118,10 +118,11 @@
       clearTimeout(timer);
       markDot(next);
 
-      var done = false;
+      var done = false, cleanupOld = function () {};
       function finish() {
         if (done) return;
         done = true;
+        cleanupOld();
         from.classList.remove('is-active');
         to.classList.remove('is-entering');
         to.classList.add('is-active');
@@ -141,12 +142,17 @@
 
       if (reduced || !to.animate) { finish(); return; }
 
-      // hiệu ứng Fade: hình mới mờ dần hiện lên phủ lên hình cũ (hình cũ khuất dần), 2,5 giây
+      // hình cũ to dần lên (phóng), rồi hình sau từ từ xuất hiện phía trên — tổng 2,5 giây
       to.classList.add('is-entering');
+      var oldAnim = from.animate(
+        [{ transform: 'scale(1)' }, { transform: 'scale(1.18)' }],
+        { duration: DUR, easing: 'ease-in', fill: 'both' }
+      );
       var anim = to.animate(
-        [{ opacity: 0, transform: 'scale(1.05)' }, { opacity: 1, transform: 'scale(1)' }],
+        [{ opacity: 0, offset: 0 }, { opacity: 0, offset: 0.35 }, { opacity: 1, offset: 1 }],
         { duration: DUR, easing: 'ease-in-out', fill: 'both' }
       );
+      cleanupOld = function () { try { oldAnim.cancel(); } catch (e) {} };
       anim.onfinish = function () { try { anim.cancel(); } catch (e) {} finish(); };
       setTimeout(finish, DUR + 400); // dự phòng
     }
