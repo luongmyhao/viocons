@@ -38,8 +38,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
   color: var(--muted); margin-bottom: 18px;
 }
 h2 {
-  font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.15; font-weight: 800; letter-spacing: -.008em;
+  font-size: clamp(1.3rem, 2.5vw, 1.95rem); line-height: 1.5; font-weight: 400; letter-spacing: .14em; text-transform: uppercase;
 }
+.hl { color: var(--green); }
+.section-dark .hl, .cta .hl { color: #6fae72; }
 .sub { color: var(--muted); margin-top: 18px; max-width: 52ch; }
 
 /* ---------- buttons ---------- */
@@ -648,4 +650,16 @@ h2 {
   .scope-num { padding-top: 0; }
   .eq-grid { grid-template-columns: 1fr; }
   .condition { grid-template-columns: auto 1fr auto; width: 100%; }
+}
+
+/* ---------- kiểu tiêu đề: chữ hoa, nét mảnh, giãn chữ rộng (theo mẫu) ---------- */
+.hero h1 { letter-spacing: .1em; line-height: 1.25; }
+.hero h1 .l1, .hero h1 .l3 { font-size: clamp(.95rem, 1.8vw, 1.25rem); font-weight: 400; letter-spacing: .22em; margin: 0; }
+.hero h1 .l2 { font-size: clamp(2rem, 5vw, 3.7rem); font-weight: 400; letter-spacing: .1em; color: var(--green); margin: 6px 0 8px; }
+.scope-title, .equip2-head h3 {
+  font-size: clamp(1.05rem, 1.9vw, 1.35rem); font-weight: 400; letter-spacing: .12em; text-transform: uppercase; line-height: 1.5;
+}
+@media (max-width: 640px) {
+  h2 { letter-spacing: .1em; }
+  .hero h1 .l2 { letter-spacing: .06em; }
 }
