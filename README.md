@@ -5,7 +5,9 @@ Trang web tĩnh (HTML/CSS/JS) của CÔNG TY TNHH THƯƠNG MẠI XÂY DỰNG VIO
 ## Cấu trúc
 
 ```
-index.html        # toàn bộ nội dung trang
+index.html        # Trang chủ
+gioi-thieu.html   # Giới thiệu (tóm tắt: dịch vụ, năng lực thi công, đội ngũ)
+dich-vu.html      # Dịch vụ (chi tiết Tư vấn – Thiết kế, Thi công xây dựng, thiết bị)
 css/style.css     # giao diện
 js/main.js        # menu, danh sách & bộ lọc dự án, form liên hệ
 assets/           # logo, favicon

@@ -482,3 +482,12 @@ h2 {
   .two-col, .equip-grid { grid-template-columns: 1fr; }
   .team { gap: 16px; }
 }
+
+/* ---------- tách trang Giới thiệu / Dịch vụ ---------- */
+.more-light { color: #fff; margin-top: 28px; border-bottom: 1.5px solid var(--orange); padding-bottom: 2px; }
+.more-light:hover { color: var(--orange); }
+.team-stats.on-dark { border-top-color: #2c2c2c; }
+.team-stats.on-dark div + div { border-left-color: #2c2c2c; }
+.team-stats.on-dark b { color: #fff; }
+.team-stats.on-dark span { color: #a9a9a4; }
+@media (max-width: 1020px) { .team-stats.on-dark div:nth-child(n+3) { border-top-color: #2c2c2c; } }
