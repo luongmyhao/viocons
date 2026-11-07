@@ -13,6 +13,16 @@
   nav.addEventListener('click', function (e) { if (e.target.tagName === 'A') setMenu(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
 
+  /* ---- nút lên đầu trang: chỉ hiện khi đã cuộn xuống ---- */
+  (function () {
+    var btn = document.getElementById('toTop');
+    if (!btn) return;
+    function upd() { btn.classList.toggle('show', window.scrollY > 420); }
+    upd();
+    window.addEventListener('scroll', upd, { passive: true });
+    btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  })();
+
   document.getElementById('year').textContent = new Date().getFullYear();
 
   /* ---- reveal on scroll ---- */
