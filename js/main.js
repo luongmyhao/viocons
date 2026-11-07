@@ -70,7 +70,7 @@
     var stage = hero.querySelector('.hero-stage');
     var dots = [].slice.call(hero.querySelectorAll('.hs-dot'));
     var idx = 0, busy = false, timer = null, heroVisible = true;
-    var AUTO_MS = 200, DUR = 1500; // tự đổi: nghỉ 0,2 giây sau khi hình trước bung xong
+    var DUR = 2500, CYCLE = 10000, AUTO_MS = CYCLE - DUR; // tự đổi: nghỉ 0,2 giây sau khi hình trước bung xong
     var reduced = false; // luôn tự chuyển và có hiệu ứng, kể cả khi hệ điều hành bật 'giảm chuyển động'
     var tagEl = hero.querySelector('.hs-tagline');
     var nextBtn = hero.querySelector('.hs-btn[data-dir="1"]');
@@ -141,7 +141,7 @@
 
       if (reduced || !to.animate) { finish(); return; }
 
-      // hiệu ứng Fade: hình mới mờ dần hiện lên phủ lên hình cũ (hình cũ khuất dần), 1,5 giây
+      // hiệu ứng Fade: hình mới mờ dần hiện lên phủ lên hình cũ (hình cũ khuất dần), 2,5 giây
       to.classList.add('is-entering');
       var anim = to.animate(
         [{ opacity: 0, transform: 'scale(1.05)' }, { opacity: 1, transform: 'scale(1)' }],
