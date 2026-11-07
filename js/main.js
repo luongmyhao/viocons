@@ -70,7 +70,7 @@
     var stage = hero.querySelector('.hero-stage');
     var dots = [].slice.call(hero.querySelectorAll('.hs-dot'));
     var idx = 0, busy = false, timer = null, heroVisible = true;
-    var AUTO_MS = 7000, DUR = 1200;
+    var AUTO_MS = 1000, DUR = 1000; // tự đổi sau 1 giây (tính từ lúc hình trước bung xong)
     var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     var tagEl = hero.querySelector('.hs-tagline');
     var nextBtn = hero.querySelector('.hs-btn[data-dir="1"]');
@@ -101,7 +101,8 @@
 
     function originOf(el) {
       var s = stage.getBoundingClientRect(), r = el.getBoundingClientRect();
-      return { x: r.left + r.width / 2 - s.left, y: r.top + r.height / 2 - s.top };
+      // hình mới luôn bung ra từ chính giữa khung
+      return { x: s.width / 2, y: s.height / 2 };
     }
 
     function schedule() {
