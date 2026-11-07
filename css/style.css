@@ -389,3 +389,13 @@ h2 {
   }
   .hero-stage .hero-grid { padding: 48px 0; }
 }
+
+/* ---------- dự toán chi phí ---------- */
+.est-form { margin-top: 36px; }
+.est-rows { margin: 0; display: grid; gap: 14px; margin-bottom: 24px; }
+.est-rows div { display: flex; justify-content: space-between; gap: 16px; font-size: .95rem; }
+.est-rows dt { color: #a9a9a4; }
+.est-rows dd { margin: 0; font-weight: 600; text-align: right; white-space: nowrap; }
+.est-note { color: #8a8a85; font-size: .8rem; line-height: 1.5; margin-bottom: 24px; }
+#du-toan .field.invalid input { border-color: #c0392b; }
+@media (max-width: 640px) { .est-rows div { flex-direction: column; gap: 2px; } .est-rows dd { text-align: left; } }

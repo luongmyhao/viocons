@@ -130,6 +130,78 @@
     });
   });
 
+  /* ---- dự toán chi phí ---- */
+  // ĐƠN GIÁ THAM KHẢO (VNĐ / m² sàn xây dựng) — chỉnh tại đây cho đúng đơn giá thực tế của VIOCONS.
+  var RATES = {
+    'new': {
+      name: 'Xây mới từ móng',
+      items: [['Chi phí thiết kế', 250000], ['Thi công phần thô', 3500000], ['Hoàn thiện', 3000000]]
+    },
+    'renovate': {
+      name: 'Cải tạo thô & hoàn thiện nội thất',
+      items: [['Chi phí thiết kế', 200000], ['Cải tạo phần thô', 2200000], ['Hoàn thiện & nội thất', 4000000]]
+    },
+    'interior': {
+      name: 'Chỉ hoàn thiện nội thất',
+      items: [['Thiết kế nội thất', 250000], ['Hoàn thiện nội thất', 3500000]]
+    }
+  };
+  var RANGE_LOW = 0.92, RANGE_HIGH = 1.08;
+
+  var estForm = document.getElementById('estForm');
+  var estArea = document.getElementById('estArea');
+  var estValue = document.getElementById('estValue');
+  var estRange = document.getElementById('estRange');
+  var estRows = document.getElementById('estRows');
+  var estMsg = document.getElementById('estMsg');
+  var lastEstimate = null;
+
+  function vnd(n) { return Math.round(n / 100000) * 100000; }
+  function fmt(n) { return vnd(n).toLocaleString('vi-VN'); }
+
+  function estimate() {
+    var area = +estArea.value || 0;
+    var pack = RATES[estForm.querySelector('input[name="pack"]:checked').value];
+    if (area < 20) {
+      lastEstimate = null;
+      estValue.textContent = '—';
+      estRange.textContent = 'Nhập diện tích từ 20 m² trở lên để xem dự toán.';
+      estRows.innerHTML = '';
+      return;
+    }
+    var total = 0, rows = '';
+    pack.items.forEach(function (it) {
+      var v = it[1] * area; total += v;
+      rows += '<div><dt>' + it[0] + '</dt><dd>' + fmt(v) + ' VNĐ</dd></div>';
+    });
+    estValue.innerHTML = fmt(total) + '<small>VNĐ</small>';
+    estRange.textContent = 'Khoảng ' + fmt(total * RANGE_LOW) + ' – ' + fmt(total * RANGE_HIGH) + ' VNĐ · ' + area + ' m²';
+    estRows.innerHTML = rows;
+    lastEstimate = { pack: pack.name, area: area, total: total };
+  }
+  estForm.addEventListener('input', estimate);
+  estForm.addEventListener('change', estimate);
+  estimate();
+
+  estForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var phone = document.getElementById('estPhone').value.trim();
+    var phoneField = document.getElementById('estPhone').closest('.field');
+    phoneField.classList.remove('invalid');
+    if (!lastEstimate || !/^[0-9+\s().-]{8,15}$/.test(phone)) {
+      if (!/^[0-9+\s().-]{8,15}$/.test(phone)) phoneField.classList.add('invalid');
+      estMsg.className = 'form-msg err';
+      estMsg.textContent = !lastEstimate ? 'Vui lòng nhập diện tích hợp lệ (từ 20 m²).' : 'Vui lòng nhập số điện thoại hợp lệ.';
+      return;
+    }
+    var body = 'ĐĂNG KÝ DỰ TOÁN\nTỉnh/thành phố: ' + document.getElementById('estProvince').value +
+      '\nHạng mục: ' + lastEstimate.pack + '\nDiện tích: ' + lastEstimate.area + ' m²' +
+      '\nDự toán sơ bộ: ' + fmt(lastEstimate.total) + ' VNĐ\nSĐT: ' + phone;
+    estMsg.className = 'form-msg';
+    estMsg.textContent = 'Ứng dụng email sẽ mở để gửi đăng ký — hoặc gọi hotline 0979.001.455 để được hỗ trợ ngay.';
+    window.location.href = 'mailto:xaydungviocons@gmail.com?subject=' + encodeURIComponent('Đăng ký dự toán - ' + phone) + '&body=' + encodeURIComponent(body);
+  });
+
   /* ---- contact form (site tĩnh: mở ứng dụng mail với nội dung điền sẵn) ---- */
   var form = document.getElementById('contactForm');
   var msg = document.getElementById('formMsg');

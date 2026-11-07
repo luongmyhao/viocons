@@ -29,7 +29,7 @@
       <a href="#dich-vu">Dịch vụ</a>
       <a href="#quy-trinh">Quy trình</a>
       <a href="#du-an">Dự án</a>
-      <a href="#cam-ket">Giá trị</a>
+      <a href="#du-toan">Dự toán</a>
       <a href="#gioi-thieu">Giới thiệu</a>
       <a href="#faq">Hỏi đáp</a>
       <a href="#lien-he">Liên hệ</a>
@@ -62,7 +62,7 @@
         </div>
         <p class="lead">Từ tư vấn, thiết kế đến thi công — VIOCONS đồng hành cùng bạn từ ý tưởng đến công trình thực tế, mang lại giá trị bền vững, trường tồn cùng năm tháng.</p>
         <div class="hero-actions">
-          <a href="#lien-he" class="btn btn-primary">Nhận tư vấn</a>
+          <a href="#du-toan" class="btn btn-primary">Dự toán chi phí</a>
           <a href="#du-an" class="btn btn-ghost">Xem dự án →</a>
         </div>
       </div>
@@ -157,11 +157,65 @@
   </div>
 </section>
 
+<!-- ============ DỰ TOÁN CHI PHÍ ============ -->
+<section class="section section-soft" id="du-toan">
+  <div class="container quote-grid">
+    <div class="reveal">
+      <p class="eyebrow">04 — Dự toán chi phí</p>
+      <h2>Nhà tôi đầu tư<br>hết bao nhiêu tiền?</h2>
+      <p class="sub">Nhận dự toán sơ bộ ngay để chủ động ngân sách cho thiết kế & thi công ngôi nhà. Con số mang tính tham khảo — VIOCONS sẽ báo giá chính xác sau khi khảo sát và chốt hồ sơ thiết kế.</p>
+
+      <form class="calc est-form" id="estForm" novalidate>
+        <div class="field-row">
+          <label class="field">Tỉnh / thành phố
+            <select id="estProvince" name="province">
+              <option>TP. Hồ Chí Minh</option>
+              <option>Lâm Đồng</option>
+              <option>Long An</option>
+              <option>Tiền Giang</option>
+              <option>Hà Nội</option>
+              <option>Đà Nẵng</option>
+              <option>Cần Thơ</option>
+              <option>Tỉnh / thành phố khác</option>
+            </select>
+          </label>
+          <label class="field">Diện tích ngôi nhà (m² sàn xây dựng)
+            <input type="number" id="estArea" name="area" min="20" max="5000" value="200" inputmode="numeric">
+          </label>
+        </div>
+
+        <fieldset class="pack" id="estPack">
+          <legend>Hạng mục</legend>
+          <label><input type="radio" name="pack" value="new" checked><span>Xây mới từ móng</span></label>
+          <label><input type="radio" name="pack" value="renovate"><span>Cải tạo thô & hoàn thiện nội thất</span></label>
+          <label><input type="radio" name="pack" value="interior"><span>Chỉ hoàn thiện nội thất</span></label>
+        </fieldset>
+
+        <label class="field">Số điện thoại
+          <input type="tel" id="estPhone" name="phone" autocomplete="tel" inputmode="tel" placeholder="09xx xxx xxx">
+        </label>
+        <button type="submit" class="btn btn-primary full">Đăng ký dự toán</button>
+        <p class="form-msg" id="estMsg" role="status"></p>
+      </form>
+    </div>
+
+    <aside class="estimate reveal" aria-live="polite">
+      <p class="est-label">Tổng dự toán sơ bộ</p>
+      <p class="est-value" id="estValue">—</p>
+      <p class="est-range" id="estRange"></p>
+      <hr>
+      <dl class="est-rows" id="estRows"></dl>
+      <p class="est-note">Dự toán sơ bộ, chưa gồm chi phí giấy phép, thuế và các hạng mục phát sinh theo thực tế. Đơn giá chỉ để tham khảo.</p>
+      <a href="tel:0979001455" class="btn btn-light">Gọi 0979.001.455</a>
+    </aside>
+  </div>
+</section>
+
 <!-- ============ CAM KẾT / GIÁ TRỊ ============ -->
-<section class="section section-soft" id="cam-ket">
+<section class="section" id="cam-ket">
   <div class="container">
     <header class="section-head reveal">
-      <p class="eyebrow">04 — Giá trị cốt lõi</p>
+      <p class="eyebrow">05 — Giá trị cốt lõi</p>
       <h2>Tử tế. Tận tâm. Trường tồn.</h2>
       <p class="sub">Mục tiêu của VIOCONS là tạo ra những sản phẩm xây dựng chất lượng, mang lại giá trị cho xã hội và sự an tâm cho khách hàng.</p>
     </header>
@@ -182,10 +236,10 @@
 </section>
 
 <!-- ============ GIỚI THIỆU ============ -->
-<section class="section" id="gioi-thieu">
+<section class="section section-soft" id="gioi-thieu">
   <div class="container quote-grid">
     <div class="reveal">
-      <p class="eyebrow">05 — Giới thiệu</p>
+      <p class="eyebrow">06 — Giới thiệu</p>
       <h2>Đội ngũ kỹ sư<br>trực tiếp làm nghề.</h2>
       <p class="sub about-p"><strong>CÔNG TY TNHH THƯƠNG MẠI XÂY DỰNG VIOCONS</strong> được thành lập và phát triển bởi đội ngũ kỹ sư giàu kinh nghiệm, từng trực tiếp tham gia nhiều dự án quy mô lớn.</p>
       <p class="sub about-p">Chúng tôi đã triển khai và quản lý các công trình vừa và nhỏ — từ nhà cao tầng, khu đô thị thấp tầng đến hạ tầng kỹ thuật — với mục tiêu mang lại giá trị bền vững, trường tồn cùng năm tháng.</p>
@@ -228,7 +282,7 @@
 <section class="section" id="faq">
   <div class="container faq-grid">
     <header class="reveal">
-      <p class="eyebrow">06 — Hỏi đáp</p>
+      <p class="eyebrow">07 — Hỏi đáp</p>
       <h2>Câu hỏi thường gặp.</h2>
     </header>
     <div class="faq reveal">
@@ -256,7 +310,7 @@
 <section class="section contact" id="lien-he">
   <div class="container contact-grid">
     <div class="reveal">
-      <p class="eyebrow">07 — Liên hệ</p>
+      <p class="eyebrow">08 — Liên hệ</p>
       <h2>Liên hệ VIOCONS</h2>
       <p class="sub">Để lại thông tin để được tư vấn, hoặc gọi trực tiếp qua hotline.</p>
 
