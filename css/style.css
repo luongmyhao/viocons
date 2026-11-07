@@ -353,3 +353,7 @@ h2 {
   .flow li:nth-child(even) { margin-left: 16px; }
   .contact-list li { grid-template-columns: 1fr; gap: 2px; }
 }
+
+/* ảnh dự án thật */
+.project .thumb img { object-position: center 35%; }
+.project .thumb { background: #e9e9e5; }

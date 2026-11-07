@@ -21,7 +21,7 @@ python -m http.server 5173
 ## Cập nhật nội dung
 
 - Thông tin liên hệ: trong `index.html` (mục `#lien-he` và footer); email nhận form ở `TO` trong `js/main.js`.
-- Dự án: mảng `PROJECTS` trong `js/main.js`. Hiện dùng hình minh họa; để dùng ảnh thật, đặt file vào `assets/projects/` và thêm `img: 'assets/projects/ten-file.jpg'` cho dự án.
+- Dự án: mảng `PROJECTS` trong `js/main.js`. Ảnh dự án nằm trong `assets/projects/`; để đổi ảnh, thay file cùng tên.
 - Form liên hệ mở ứng dụng email với nội dung điền sẵn (GitHub Pages không nhận dữ liệu form).
 
 ## Triển khai

@@ -69,7 +69,10 @@
     { name: 'Rạch Bảo Định', meta: 'Mỹ Tho, Tiền Giang', group: 'cong-cong', kind: 'water', label: 'Hạ tầng' },
     { name: 'Kè Tân Thành', meta: 'Gò Công Đông, Tiền Giang', group: 'cong-cong', kind: 'water', label: 'Hạ tầng' }
   ];
-  var TONES = { house: '#3f7a3a', school: '#c9722a', road: '#4a4f55', water: '#2f6a86' };
+  // ảnh thật của từng dự án (cùng thứ tự với PROJECTS)
+  ['eco-retreat', 'grand-manhattan', 'tang-bat-ho', 'mam-non-19-5', 'ly-thanh-tong', 'my-loc', 'duong-826c', 'tan-quy-tan-dai', 'rach-bao-dinh', 'ke-tan-thanh']
+    .forEach(function (f, i) { PROJECTS[i].img = 'assets/projects/' + f + '.png'; });
+  var TONES ={ house: '#3f7a3a', school: '#c9722a', road: '#4a4f55', water: '#2f6a86' };
 
   // line-art thumbnail by project kind (illustration only, until real photos are added)
   function art(p, i) {
