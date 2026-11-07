@@ -26,10 +26,15 @@
   /* ---- menu con "Dự án": liệt kê các dự án của từng nhóm khi rê chuột ---- */
   (function () {
     var P = window.VIOCONS_PROJECTS || [];
+    function esc2(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
     document.querySelectorAll('.sub-item').forEach(function (it) {
       var g = it.getAttribute('data-group'), ul = it.querySelector('.sub-projects');
       if (!ul) return;
-      ul.innerHTML = P.map(function (p, i) { return p.group === g ? '<li><a href="du-an.html?nhom=' + g + '#pj-' + i + '" role="menuitem">' + String(p.name).replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</a></li>' : ''; }).join('');
+      it.addEventListener('mouseenter', function () {
+        var nav = it.closest('.nav-sub'); if (!nav) return;
+        nav.classList.toggle('flip', nav.getBoundingClientRect().right + 320 > window.innerWidth);
+      });
+      ul.innerHTML = P.map(function (p, i) { return p.group === g ? '<li><a href="du-an.html?nhom=' + g + '#pj-' + i + '" role="menuitem"><b>' + esc2(p.name) + '</b><small>' + esc2(p.meta) + '</small></a></li>' : ''; }).join('');
     });
   })();
 
