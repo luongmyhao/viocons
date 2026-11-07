@@ -54,6 +54,13 @@
     counters.forEach(function (c) { c.textContent = c.dataset.count + (c.dataset.suffix || ''); });
   }
 
+  /* ---- trang chủ: thanh tab chỉ hiện khi bắt đầu cuộn ---- */
+  if (document.body.classList.contains('page-home')) {
+    var updateTop = function () { document.body.classList.toggle('at-top', window.scrollY < 40); };
+    updateTop();
+    window.addEventListener('scroll', updateTop, { passive: true });
+  }
+
   /* ---- hero slider: nút trái/phải, hình "bung" ra toàn khung ---- */
   (function () {
     var hero = document.querySelector('.hero-slider');

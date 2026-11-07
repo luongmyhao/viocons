@@ -971,3 +971,16 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
   .hero-slider .hero-stage .hero-grid, .hero-short.hero-slider .hero-stage .hero-grid { padding: 20px 0 170px; }
 }
 .hs-overlay { background: linear-gradient(90deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.92) 38%, rgba(255,255,255,.45) 54%, rgba(255,255,255,0) 72%); }
+
+/* =====================================================================
+   v32 — Trang chủ: thanh tab ẩn khi ở đầu trang, hiện ra khi bắt đầu cuộn (máy tính)
+   ===================================================================== */
+@media (min-width: 901px) {
+  .page-home .site-header { position: fixed; left: 0; right: 0; top: 0; transition: transform .45s var(--ease), opacity .3s ease; }
+  .page-home.at-top .site-header { transform: translateY(-110%); opacity: 0; pointer-events: none; }
+  /* vẫn hiện khi người dùng dùng bàn phím (Tab) để điều hướng */
+  .page-home.at-top .site-header:focus-within { transform: none; opacity: 1; pointer-events: auto; }
+  /* headline phủ kín từ mép trên */
+  .page-home .hero-stage { min-height: 100vh; }
+  html.no-js .page-home.at-top .site-header { transform: none; opacity: 1; pointer-events: auto; }
+}
