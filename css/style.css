@@ -491,3 +491,22 @@ h2 {
 .team-stats.on-dark b { color: #fff; }
 .team-stats.on-dark span { color: #a9a9a4; }
 @media (max-width: 1020px) { .team-stats.on-dark div:nth-child(n+3) { border-top-color: #2c2c2c; } }
+
+/* ---------- ảnh nền cho 6 khung dịch vụ (giữ nguyên bố cục khung cũ) ---------- */
+.service.has-photo { position: relative; overflow: hidden; isolation: isolate; color: #fff; background: #1b1b1b; border-color: #fff; }
+.service-bg {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;
+  transition: transform .9s var(--ease);
+}
+.service.has-photo::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(10,10,10,.52) 0%, rgba(10,10,10,.58) 45%, rgba(10,10,10,.78) 100%);
+  transition: background .4s;
+}
+.service.has-photo:hover { background: #1b1b1b; color: #fff; }
+.service.has-photo:hover .service-bg { transform: scale(1.06); }
+.service.has-photo:hover::after { background: linear-gradient(180deg, rgba(10,10,10,.40) 0%, rgba(10,10,10,.48) 45%, rgba(10,10,10,.72) 100%); }
+.service.has-photo h3 { color: #fff; }
+.service.has-photo p, .service.has-photo:hover p { color: #e6e6e1; }
+.service.has-photo .more { color: #fff; border-bottom: 1.5px solid var(--orange); padding-bottom: 1px; }
+.service.has-photo:hover .more { color: var(--orange); }
