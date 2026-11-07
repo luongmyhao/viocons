@@ -1532,3 +1532,13 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
   .nav .nav-sub .sub-projects a:hover { background: var(--soft); color: var(--ui-green); }
   .nav .nav-sub .sub-projects a:hover small { color: var(--ui-green); }
 }
+
+/* v69 — bảng dự án không biến mất khi di chuột sang: cầu nối cả hai phía + trễ khi ẩn */
+@media (min-width: 901px) {
+  .sub-projects::before { width: 28px; left: -28px; }
+  .nav-sub.flip .sub-projects::before { left: auto; right: -28px; }
+  .sub-projects { transition: opacity .25s ease .35s, transform .3s var(--ease) .35s, visibility 0s linear .6s; }
+  .sub-item:hover .sub-projects, .sub-item:focus-within .sub-projects { transition: opacity .25s ease, transform .3s var(--ease), visibility 0s; }
+  .nav-sub { transition: opacity .25s ease .3s, transform .25s ease .3s, visibility 0s linear .55s; }
+  .nav-item:hover .nav-sub, .nav-item:focus-within .nav-sub { transition: opacity .25s ease, transform .25s ease, visibility 0s; }
+}
