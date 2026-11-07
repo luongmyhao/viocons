@@ -1221,3 +1221,49 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
 .pj-head { position: absolute; top: 44px; left: 44px; right: 24px; display: grid; gap: 8px; }
 .pj-head .pj-name, .pj-head .pj-meta { position: static; }
 @media (max-width: 640px) { .pj-head { left: 28px; top: 32px; } }
+
+/* =====================================================================
+   v52 — Dự án: hợp phong cách trang (nền đen, chữ đậm Be Vietnam Pro, điểm nhấn cam/xanh);
+   rê chuột: ảnh to dần ra, chữ biến mất; rê đi: ảnh nhỏ lại, chữ hiện lại
+   ===================================================================== */
+.pj-section { background: var(--ink); }
+.pj-wrap { margin-top: 24px; }
+.pj-card { border-right: 1px solid rgba(255,255,255,.1); }
+.pj-img { transition: transform 1.3s cubic-bezier(.22, .8, .2, 1); will-change: transform; }
+.pj-card::before {
+  background: linear-gradient(180deg, rgba(10,10,10,.78) 0%, rgba(10,10,10,.3) 38%, rgba(10,10,10,.12) 62%, rgba(10,10,10,.7) 100%);
+  transition: opacity .8s ease; opacity: 1;
+}
+.pj-card:hover .pj-img, .pj-card:focus-visible .pj-img { transform: scale(1.22); }
+.pj-card:hover::before, .pj-card:focus-visible::before { opacity: .12; background: linear-gradient(180deg, rgba(10,10,10,.78) 0%, rgba(10,10,10,.3) 38%, rgba(10,10,10,.12) 62%, rgba(10,10,10,.7) 100%); }
+
+/* chữ: kiểu của trang (đậm, không viết hoa), điểm nhấn cam */
+.pj-head { top: 40px; left: 36px; right: 24px; gap: 10px; transition: opacity .35s ease, transform .5s ease; }
+.pj-num { font-size: .8rem; font-weight: 700; letter-spacing: .14em; color: var(--orange); display: flex; align-items: center; gap: 12px; }
+.pj-num::after { content: ""; width: 28px; height: 2px; background: var(--orange); }
+.pj-head .pj-name { font-size: clamp(1.15rem, 1.7vw, 1.6rem); font-weight: 800; letter-spacing: -.01em; text-transform: none; line-height: 1.25; color: #fff; }
+.pj-head .pj-meta { font-size: .85rem; color: rgba(255,255,255,.82); letter-spacing: 0; }
+.pj-type { left: 34px; bottom: 32px; transition: opacity .35s ease, transform .5s ease; letter-spacing: .3em; font-weight: 600; color: rgba(255,255,255,.92); }
+.pj-card:hover .pj-head, .pj-card:focus-visible .pj-head { opacity: 0; transform: translateY(-14px); }
+.pj-card:hover .pj-type, .pj-card:focus-visible .pj-type { opacity: 0; transform: rotate(180deg) translateY(-14px); }
+
+/* vòng tròn phóng to: màu xanh của trang */
+.pj-zoom { background: rgba(63,122,58,.88); box-shadow: 0 10px 40px rgba(0,0,0,.35); }
+
+/* nút trái/phải: nút tròn như các nút của trang */
+.pj-nav {
+  width: 54px; height: 54px; padding: 0; border-radius: 50%; display: grid; place-items: center; letter-spacing: 0;
+  background: rgba(255,255,255,.92); color: var(--ink); text-shadow: none; box-shadow: 0 8px 26px rgba(0,0,0,.4); transition: background .25s, color .25s, transform .25s;
+}
+.pj-nav svg { width: 22px; height: 22px; }
+.pj-nav:hover { letter-spacing: 0; background: var(--ui-green); color: #fff; transform: translateY(-50%) scale(1.08); }
+.pj-prev { left: 18px; }
+.pj-next { right: 18px; }
+@media (max-width: 640px) { .pj-nav { width: 44px; height: 44px; } .pj-head { left: 24px; top: 30px; } .pj-type { left: 22px; } }
+@media (hover: none) {
+  .pj-card:hover .pj-head, .pj-card:hover .pj-type { opacity: 1; transform: none; }
+  .pj-card:hover .pj-type { transform: rotate(180deg); }
+  .pj-card:hover .pj-img { transform: none; }
+  .pj-card:hover::before { opacity: 1; }
+  .pj-card:hover .pj-zoom { opacity: 0; }
+}

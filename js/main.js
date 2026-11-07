@@ -256,7 +256,7 @@
     return '<article class="pj-card" data-cat="' + p.group + '" data-i="' + i + '" tabindex="0" role="button" aria-label="Xem ảnh ' + esc(p.name) + '">' +
       '<div class="pj-img" style="' + bg + '"></div>' +
       '<span class="pj-zoom">' + ZOOM + '</span>' +
-      '<div class="pj-head"><h3 class="pj-name">' + esc(p.name) + '</h3>' +
+      '<div class="pj-head"><span class="pj-num">' + (i < 9 ? '0' : '') + (i + 1) + '</span><h3 class="pj-name">' + esc(p.name) + '</h3>' +
       '<p class="pj-meta">' + esc(p.meta) + '</p></div>' +
       '<span class="pj-type">' + TYPE[p.group] + '</span></article>';
   }).join('');
