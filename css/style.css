@@ -744,3 +744,48 @@ body::before {
 .tagrow li { border-color: rgba(80,116,64,.45); color: var(--ui-green-d); background: rgba(80,116,64,.08); }
 .chip:hover { border-color: var(--ui-green); }
 .chip.active { background: var(--ui-green); border-color: var(--ui-green); color: #fff; }
+
+/* ---------- v21: xanh như nút cũ khi rê chuột; thẻ/nút/tabbar nền xanh; headline dịch vào và rơi từ trên xuống ---------- */
+:root { --ui-green: #3f7a3a; --ui-green-d: #2c5a29; }
+
+/* nút */
+.btn-primary, .btn-light, .estimate .btn-light, .cta .btn-light { background: var(--ui-green); color: #fff; }
+.btn-primary:hover, .btn-light:hover, .estimate .btn-light:hover, .cta .btn-light:hover { background: var(--ui-green-d); color: #fff; }
+.btn-ghost, .btn-outline-light { border-color: var(--ui-green); color: var(--ui-green); }
+.btn-ghost:hover, .btn-outline-light:hover { background: var(--ui-green); color: #fff; }
+.pack input:checked + span { background: var(--ui-green); border-color: var(--ui-green); color: #fff; }
+.pack label:hover span { border-color: var(--ui-green); }
+.chip.active { background: var(--ui-green); border-color: var(--ui-green); color: #fff; }
+.chip:hover { border-color: var(--ui-green); }
+
+/* thẻ thông tin dạng nút: nền xanh, chữ trắng */
+.subnav a, .scope li, .tech li, .tech.dark li, .tagrow li {
+  background: var(--ui-green); border-color: var(--ui-green); color: #fff;
+}
+.subnav a:hover { background: var(--ui-green-d); border-color: var(--ui-green-d); color: #fff; }
+.tagrow li { font-weight: 600; }
+
+/* thanh tab: nền xanh (máy tính) */
+.header-cta { background: var(--ui-green); border-color: var(--ui-green); color: #fff; }
+.header-cta:hover { background: var(--ui-green-d); border-color: var(--ui-green-d); color: #fff; }
+.dot { background: #fff; animation: none; }
+@media (min-width: 901px) {
+  .nav { background: var(--ui-green); border-radius: 999px; padding: 6px; gap: 4px; }
+  .nav a { color: #fff; padding: 9px 18px; border-radius: 999px; font-weight: 500; transition: background .25s, color .25s; }
+  .nav a::after { display: none; }
+  .nav a:hover { background: rgba(255,255,255,.2); color: #fff; }
+  .nav a.active { background: #fff; color: var(--ui-green); font-weight: 600; }
+}
+
+/* headline: dịch vào trong một chút + hiệu ứng rơi từ trên xuống */
+.hero-copy { margin-left: clamp(0px, 4vw, 96px); }
+@media (max-width: 760px) { .hero-copy { margin-left: 0; } }
+@keyframes dropIn { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: none; } }
+.hero .eyebrow, .hero-title .arrow, .hero h1 > span, .hero .lead, .hero-actions { animation: dropIn .9s var(--ease) both; }
+.hero .eyebrow { animation-delay: .05s; }
+.hero-title .arrow { animation-delay: .2s; }
+.hero h1 .l1 { animation-delay: .15s; }
+.hero h1 .l2 { animation-delay: .3s; }
+.hero h1 .l3 { animation-delay: .45s; }
+.hero .lead { animation-delay: .6s; }
+.hero-actions { animation-delay: .75s; }
