@@ -1019,3 +1019,38 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
   .hero-slider .hero-copy { margin-left: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .hs-tagline .ch { animation: none; } }
+
+/* =====================================================================
+   v34 — ảnh mới; bỏ số đếm; nút điều khiển nhỏ, mảnh ở góc phải dưới kèm chấm; chữ chủ đề ở bên phải
+   ===================================================================== */
+.hs-controls {
+  left: auto; right: var(--gutter); bottom: clamp(16px, 3vh, 30px); justify-content: flex-end; gap: 6px; align-items: center;
+  padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.82); box-shadow: 0 4px 18px rgba(0,0,0,.18);
+}
+.hs-btn { width: 30px; height: 30px; background: none; border: 0; box-shadow: none; color: var(--ink); padding: 0; }
+.hs-btn svg { width: 17px; height: 17px; }
+.hs-btn:hover { background: none; color: var(--ui-green); transform: scale(1.15); }
+.hs-dots { display: flex; align-items: center; gap: 8px; padding: 0 4px; }
+.hs-dot {
+  width: 7px; height: 7px; padding: 0; border: 0; border-radius: 99px; background: rgba(10,42,26,.3); cursor: pointer;
+  transition: width .4s var(--ease), background .3s;
+}
+.hs-dot:hover { background: rgba(10,42,26,.6); }
+.hs-dot.is-active { width: 22px; background: var(--ui-green); }
+.hs-dot:focus-visible, .hs-btn:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+
+/* chữ chủ đề: dọc theo cạnh phải, đọc từ dưới lên; nền trắng mờ mỏng để đọc được trên mọi hình */
+.hs-tagline {
+  left: auto; right: calc(var(--gutter) - 6px); top: 50%;
+  padding: 18px 9px; border-radius: 12px; background: rgba(255,255,255,.8); box-shadow: 0 4px 18px rgba(0,0,0,.16);
+}
+.hero-slider .hero-copy { margin-left: clamp(0px, 4vw, 96px); }
+
+@media (max-width: 760px) {
+  .hs-tagline { left: var(--gutter); right: auto; padding: 8px 14px; border-radius: 10px; bottom: calc(clamp(16px, 3vh, 30px) + 52px); max-width: calc(100% - 2 * var(--gutter)); }
+  .hs-controls { padding: 5px 10px; }
+}
+@media (max-width: 760px) {
+  .hs-tagline { top: auto; right: auto; writing-mode: horizontal-tb; transform: none; white-space: normal; letter-spacing: .18em; font-size: .82rem; }
+  .hs-tagline.is-out { transform: none; letter-spacing: .18em; }
+}

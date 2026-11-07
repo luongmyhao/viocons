@@ -61,21 +61,20 @@
     window.addEventListener('scroll', updateTop, { passive: true });
   }
 
-  /* ---- hero slider: hình "bung" tròn từ nút bấm + chữ bung từng ký tự; tự chuyển hoặc bấm nút ---- */
+  /* ---- hero slider: hình "bung" tròn từ nút bấm + chữ bung từng ký tự; tự chuyển, bấm mũi tên hoặc chấm ---- */
   (function () {
     var hero = document.querySelector('.hero-slider');
     if (!hero) return;
     var slides = [].slice.call(hero.querySelectorAll('.hs-slide'));
     if (slides.length < 2) return;
     var stage = hero.querySelector('.hero-stage');
+    var dots = [].slice.call(hero.querySelectorAll('.hs-dot'));
     var idx = 0, busy = false, timer = null, heroVisible = true;
     var AUTO_MS = 7000, DUR = 1200;
     var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var countEl = hero.querySelector('.hs-count b');
     var tagEl = hero.querySelector('.hs-tagline');
     var nextBtn = hero.querySelector('.hs-btn[data-dir="1"]');
     var prevBtn = hero.querySelector('.hs-btn[data-dir="-1"]');
-    function pad(n) { return (n < 10 ? '0' : '') + n; }
 
     // chữ chủ đề: tách thành từng ký tự để "bung" lần lượt
     function renderTagline(text, animate) {
@@ -93,24 +92,30 @@
     }
     renderTagline(slides[0].getAttribute('data-tagline') || '', true);
 
-    function originOf(btn) {
-      var s = stage.getBoundingClientRect(), r = btn.getBoundingClientRect();
+    function markDot(n) {
+      dots.forEach(function (d, i) {
+        d.classList.toggle('is-active', i === n);
+        if (i === n) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+      });
+    }
+
+    function originOf(el) {
+      var s = stage.getBoundingClientRect(), r = el.getBoundingClientRect();
       return { x: r.left + r.width / 2 - s.left, y: r.top + r.height / 2 - s.top };
     }
 
     function schedule() {
       clearTimeout(timer);
       if (reduced || !heroVisible || document.hidden) return;
-      timer = setTimeout(function () { go(1, nextBtn); }, AUTO_MS);
+      timer = setTimeout(function () { goTo((idx + 1) % slides.length, nextBtn); }, AUTO_MS);
     }
 
-    function go(dir, originBtn) {
-      if (busy) return;
-      var next = (idx + dir + slides.length) % slides.length;
+    function goTo(next, originEl) {
+      if (busy || next === idx) return;
       var from = slides[idx], to = slides[next];
       busy = true;
       clearTimeout(timer);
-      countEl.textContent = pad(next + 1);
+      markDot(next);
 
       var done = false;
       function finish() {
@@ -135,8 +140,8 @@
 
       if (reduced || !to.animate) { finish(); return; }
 
-      // hình mới bung tròn từ chính nút vừa bấm (hoặc nút "sau" khi tự chuyển)
-      var o = originOf(originBtn || nextBtn);
+      // hình mới bung tròn từ chính nút / chấm vừa bấm (hoặc nút "sau" khi tự chuyển)
+      var o = originOf(originEl || nextBtn);
       to.classList.add('is-entering');
       var anim = to.animate(
         [
@@ -148,9 +153,13 @@
       anim.onfinish = function () { try { anim.cancel(); } catch (e) {} finish(); };
       setTimeout(finish, DUR + 400); // dự phòng
     }
+    function step(dir, el) { goTo((idx + dir + slides.length) % slides.length, el); }
 
     hero.querySelectorAll('.hs-btn').forEach(function (b) {
-      b.addEventListener('click', function () { go(+b.getAttribute('data-dir'), b); });
+      b.addEventListener('click', function () { step(+b.getAttribute('data-dir'), b); });
+    });
+    dots.forEach(function (d) {
+      d.addEventListener('click', function () { goTo(+d.getAttribute('data-i'), d); });
     });
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
@@ -158,7 +167,7 @@
       if (/INPUT|TEXTAREA|SELECT/.test(tag)) return;
       var r = hero.getBoundingClientRect();
       if (r.bottom < innerHeight * 0.4 || r.top > innerHeight * 0.6) return;
-      go(e.key === 'ArrowRight' ? 1 : -1, e.key === 'ArrowRight' ? nextBtn : prevBtn);
+      step(e.key === 'ArrowRight' ? 1 : -1, e.key === 'ArrowRight' ? nextBtn : prevBtn);
     });
     // vuốt ngang trên điện thoại
     var x0 = null;
@@ -166,7 +175,7 @@
     hero.addEventListener('touchend', function (e) {
       if (x0 === null) return;
       var dx = e.changedTouches[0].clientX - x0; x0 = null;
-      if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1, dx < 0 ? nextBtn : prevBtn);
+      if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1, dx < 0 ? nextBtn : prevBtn);
     }, { passive: true });
 
     // tự chuyển khi headline đang trên màn hình; tạm dừng khi cuộn đi hoặc chuyển tab
