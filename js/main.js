@@ -211,6 +211,9 @@
   // ảnh thật của từng dự án (cùng thứ tự với PROJECTS)
   ['eco-retreat', 'grand-manhattan', 'tang-bat-ho', 'mam-non-19-5', 'ly-thanh-tong', 'my-loc', 'duong-826c', 'tan-quy-tan-dai', 'rach-bao-dinh', 'ke-tan-thanh']
     .forEach(function (f, i) { PROJECTS[i].img = 'assets/projects/' + f + '.png'; });
+  // ảnh mới cho 6 dự án đầu (theo thứ tự dự án)
+  var NEWIMG = { 0: 'pj-eco-retreat', 1: 'pj-grand-manhattan', 2: 'pj-tang-bat-ho', 3: 'pj-mam-non', 4: 'pj-ly-thanh-tong', 5: 'pj-my-loc' };
+  Object.keys(NEWIMG).forEach(function (k) { PROJECTS[+k].img = 'assets/projects/' + NEWIMG[k] + '.webp?v=2'; });
   var TONES ={ house: '#3f7a3a', school: '#c9722a', road: '#4a4f55', water: '#2f6a86' };
 
   // line-art thumbnail by project kind (illustration only, until real photos are added)
