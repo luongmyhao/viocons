@@ -276,6 +276,37 @@
     grid.scrollTo({ left: 0 });
   });
 
+  // rê chuột: ảnh zoom từ từ liên tục cho đến khi rê đi, rồi nhỏ dần lại; chữ biến mất (không phụ thuộc :hover / giảm chuyển động)
+  grid.querySelectorAll('.pj-card').forEach(function (card) {
+    var img = card.querySelector('.pj-img'), zoomAnim = null;
+    function scaleNow() {
+      var m = /matrix\(([^,]+),/.exec(getComputedStyle(img).transform);
+      return m ? parseFloat(m[1]) : 1;
+    }
+    card.addEventListener('mouseenter', function () {
+      card.classList.add('is-hover');
+      if (!img.animate) return;
+      var from = scaleNow();
+      if (zoomAnim) zoomAnim.cancel();
+      zoomAnim = img.animate(
+        [{ transform: 'scale(' + from + ')' }, { transform: 'scale(1.75)' }],
+        { duration: 14000, easing: 'cubic-bezier(.2, .6, .3, 1)', fill: 'forwards' }
+      );
+    });
+    card.addEventListener('mouseleave', function () {
+      card.classList.remove('is-hover');
+      if (!img.animate) return;
+      var cur = scaleNow();
+      if (zoomAnim) zoomAnim.cancel();
+      zoomAnim = img.animate(
+        [{ transform: 'scale(' + cur + ')' }, { transform: 'scale(1)' }],
+        { duration: 1400, easing: 'cubic-bezier(.22, .8, .2, 1)', fill: 'none' }
+      );
+      var a = zoomAnim;
+      a.onfinish = function () { if (zoomAnim === a) zoomAnim = null; };
+    });
+  });
+
   // PREV / NEXT: cuộn từng thẻ
   function pjStep(dir) {
     var card = grid.querySelector('.pj-card:not(.hide)');

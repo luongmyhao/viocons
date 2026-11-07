@@ -1286,3 +1286,12 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
 .pj-img { transition: transform 1.4s cubic-bezier(.22, .8, .2, 1); }
 .pj-card:hover .pj-img, .pj-card:focus-visible .pj-img { transform: scale(1.7); transition: transform 12s cubic-bezier(.12, .55, .25, 1); }
 @media (max-width: 640px) { .pj-head .pj-name { font-size: 1.4rem; } .pj-head .pj-meta { font-size: 1rem; } }
+
+/* v55 — hiệu ứng rê chuột điều khiển bằng lớp .is-hover (JS) để luôn chạy; zoom ảnh do JS đảm nhiệm */
+.pj-card:hover .pj-img, .pj-card:focus-visible .pj-img { transform: none; transition: none; }
+.pj-card.is-hover::before { opacity: .38; transition: opacity .8s ease !important; }
+.pj-card .pj-head, .pj-card .pj-type { transition: opacity .45s ease, transform .6s ease !important; }
+.pj-card.is-hover .pj-head { opacity: 0; transform: translateY(-14px); }
+.pj-card.is-hover .pj-type { opacity: 0; transform: rotate(180deg) translateY(-14px); }
+.pj-card .pj-zoom { transition: opacity .45s ease, transform .6s var(--ease) !important; }
+.pj-card.is-hover .pj-zoom { opacity: 1; transform: none; }
