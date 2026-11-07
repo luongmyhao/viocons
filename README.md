@@ -30,3 +30,12 @@ python -m http.server 5173
 ## Triển khai
 
 GitHub Pages (Settings → Pages → Deploy from branch → `main` / root): https://luongmyhao.github.io/viocons/
+
+## Bản web động (có khu quản trị)
+
+Thư mục [`server/`](server/README.md) chứa máy chủ Node.js để chạy website trên tên miền riêng, kèm khu quản trị `/quan-tri` cho người của công ty tự cập nhật dự án, hình ảnh, thông tin liên hệ và xem tin nhắn khách gửi. Xem:
+
+- [server/README.md](server/README.md) — cài đặt, triển khai lên hosting cPanel, bảo mật.
+- [server/HUONG-DAN-QUAN-TRI.md](server/HUONG-DAN-QUAN-TRI.md) — hướng dẫn sử dụng cho người quản trị.
+
+Bản GitHub Pages ở trên vẫn là bản tĩnh (dùng `js/projects.js`, form liên hệ mở ứng dụng email). Khi chạy bằng máy chủ, `js/projects.js` và thông tin liên hệ được lấy từ dữ liệu quản trị.

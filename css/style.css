@@ -1631,3 +1631,7 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
 .proj-line a + a, .proj-line span + a { margin-left: 0; }
 .proj-line a { font-weight: 500; }
 @media (max-width: 900px) { .svc-tabs { top: 72px; } }
+
+/* v79 — ô bẫy chống thư rác của form liên hệ; thông báo gửi thành công */
+.ft-form .hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.ft-form .form-msg.ok { color: #9fd29a; }

@@ -269,12 +269,26 @@
     schedule();
   })();
 
-  /* ---- form liên hệ ở chân trang (chạy trên mọi trang; site tĩnh nên mở ứng dụng email với nội dung điền sẵn) ---- */
+  /* ---- gửi liên hệ: lưu vào khu quản trị (máy chủ); nếu không có máy chủ (bản demo tĩnh) thì mở ứng dụng email ---- */
+  window.vioSend = function (payload, done) {
+    // done(status, errorText): status 'ok' | 'rejected' | 'offline'
+    if (!window.fetch) return done('offline');
+    fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+      .then(function (r) {
+        var ct = r.headers.get('content-type') || '';
+        if (ct.indexOf('json') < 0) return done('offline');
+        return r.json().then(function (j) { done(r.ok ? 'ok' : 'rejected', j && j.error); });
+      })
+      .catch(function () { done('offline'); });
+  };
+
+  /* ---- form liên hệ ở chân trang ---- */
   (function () {
     var form = document.getElementById('contactForm');
     if (!form) return;
     var msg = document.getElementById('formMsg');
     var TO = 'xaydungviocons@gmail.com';
+    var btn = form.querySelector('[type="submit"]');
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var d = new FormData(form);
@@ -290,9 +304,24 @@
         return;
       }
       var body = 'Họ tên: ' + name + '\nSĐT: ' + phone + '\nNhu cầu: ' + d.get('need') + '\nNội dung: ' + (d.get('note') || '—');
+      if (btn) btn.disabled = true;
       msg.className = 'form-msg';
-      msg.textContent = 'Cảm ơn bạn! Ứng dụng email sẽ mở để gửi yêu cầu — hoặc gọi hotline 0979.001.455.';
-      window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent('Yêu cầu tư vấn từ ' + name) + '&body=' + encodeURIComponent(body);
+      msg.textContent = 'Đang gửi…';
+      window.vioSend({ kind: 'contact', name: name, phone: phone, need: d.get('need') || '', note: d.get('note') || '', website: d.get('hp_site') || '' }, function (st, err) {
+        if (btn) btn.disabled = false;
+        if (st === 'ok') {
+          form.reset();
+          msg.className = 'form-msg ok';
+          msg.textContent = 'Cảm ơn bạn! VIOCONS đã nhận được thông tin và sẽ liên hệ lại sớm nhất.';
+        } else if (st === 'rejected') {
+          msg.className = 'form-msg err';
+          msg.textContent = err || 'Chưa gửi được, vui lòng thử lại hoặc gọi hotline 0979.001.455.';
+        } else {
+          msg.className = 'form-msg';
+          msg.textContent = 'Cảm ơn bạn! Ứng dụng email sẽ mở để gửi yêu cầu — hoặc gọi hotline 0979.001.455.';
+          window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent('Yêu cầu tư vấn từ ' + name) + '&body=' + encodeURIComponent(body);
+        }
+      });
     });
   })();
 
@@ -503,8 +532,20 @@
       '\nHạng mục: ' + lastEstimate.pack + '\nDiện tích: ' + lastEstimate.area + ' m²' +
       '\nDự toán sơ bộ: ' + fmt(lastEstimate.total) + ' VNĐ\nSĐT: ' + phone;
     estMsg.className = 'form-msg';
-    estMsg.textContent = 'Ứng dụng email sẽ mở để gửi đăng ký — hoặc gọi hotline 0979.001.455 để được hỗ trợ ngay.';
-    window.location.href = 'mailto:xaydungviocons@gmail.com?subject=' + encodeURIComponent('Đăng ký dự toán - ' + phone) + '&body=' + encodeURIComponent(body);
+    estMsg.textContent = 'Đang gửi…';
+    window.vioSend({ kind: 'estimate', phone: phone, province: document.getElementById('estProvince').value, pack: lastEstimate.pack, area: String(lastEstimate.area), total: fmt(lastEstimate.total) + ' VNĐ' }, function (st, err) {
+      if (st === 'ok') {
+        estMsg.className = 'form-msg ok';
+        estMsg.textContent = 'Cảm ơn bạn! VIOCONS đã nhận đăng ký và sẽ gọi lại để tư vấn dự toán chi tiết.';
+      } else if (st === 'rejected') {
+        estMsg.className = 'form-msg err';
+        estMsg.textContent = err || 'Chưa gửi được, vui lòng thử lại hoặc gọi hotline 0979.001.455.';
+      } else {
+        estMsg.className = 'form-msg';
+        estMsg.textContent = 'Ứng dụng email sẽ mở để gửi đăng ký — hoặc gọi hotline 0979.001.455 để được hỗ trợ ngay.';
+        window.location.href = 'mailto:xaydungviocons@gmail.com?subject=' + encodeURIComponent('Đăng ký dự toán - ' + phone) + '&body=' + encodeURIComponent(body);
+      }
+    });
   });
 
 })();
