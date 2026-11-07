@@ -1,13 +1,13 @@
-# Viocons — Website
+# VIOCONS — Website
 
-Trang web tĩnh (HTML/CSS/JS) giới thiệu dịch vụ thiết kế & thi công xây dựng của Viocons. Phong cách tối giản, hiện đại, responsive.
+Trang web tĩnh (HTML/CSS/JS) của CÔNG TY TNHH THƯƠNG MẠI XÂY DỰNG VIOCONS. Phong cách tối giản, hiện đại, responsive. Nội dung lấy từ website gốc https://xaydungviocons.com.vn/.
 
 ## Cấu trúc
 
 ```
 index.html        # toàn bộ nội dung trang
 css/style.css     # giao diện
-js/main.js        # menu, bộ lọc dự án, máy tính chi phí, form liên hệ
+js/main.js        # menu, danh sách & bộ lọc dự án, form liên hệ
 assets/           # logo, favicon
 ```
 
@@ -20,13 +20,10 @@ python -m http.server 5173
 
 ## Cập nhật nội dung
 
-Các thông tin sau đang là **dữ liệu mẫu**, cần thay bằng thông tin thật của Viocons:
-
-- Hotline `0900 000 000`, email `info@viocons.vn`, địa chỉ văn phòng (trong `index.html`; email nhận form ở đầu mục "contact form" trong `js/main.js`).
-- Số liệu thống kê (12 năm, 250+ công trình…) trong khối `.stats`.
-- Danh sách dự án: mảng `PROJECTS` trong `js/main.js` (hiện dùng hình minh họa; thay bằng ảnh thật trong `assets/projects/`).
-- Đơn giá tham khảo của máy tính chi phí: `value` của 3 ô `input[name="pack"]` trong `index.html` (VNĐ/m²).
+- Thông tin liên hệ: trong `index.html` (mục `#lien-he` và footer); email nhận form ở `TO` trong `js/main.js`.
+- Dự án: mảng `PROJECTS` trong `js/main.js`. Hiện dùng hình minh họa; để dùng ảnh thật, đặt file vào `assets/projects/` và thêm `img: 'assets/projects/ten-file.jpg'` cho dự án.
+- Form liên hệ mở ứng dụng email với nội dung điền sẵn (GitHub Pages không nhận dữ liệu form).
 
 ## Triển khai
 
-Host bằng GitHub Pages (Settings → Pages → Deploy from branch → `main` / root).
+GitHub Pages (Settings → Pages → Deploy from branch → `main` / root): https://luongmyhao.github.io/viocons/
