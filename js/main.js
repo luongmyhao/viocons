@@ -23,6 +23,16 @@
     btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
   })();
 
+  /* ---- menu con "Dự án": liệt kê các dự án của từng nhóm khi rê chuột ---- */
+  (function () {
+    var P = window.VIOCONS_PROJECTS || [];
+    document.querySelectorAll('.sub-item').forEach(function (it) {
+      var g = it.getAttribute('data-group'), ul = it.querySelector('.sub-projects');
+      if (!ul) return;
+      ul.innerHTML = P.map(function (p, i) { return p.group === g ? '<li><a href="du-an.html?nhom=' + g + '#pj-' + i + '" role="menuitem">' + String(p.name).replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</a></li>' : ''; }).join('');
+    });
+  })();
+
   document.getElementById('year').textContent = new Date().getFullYear();
 
   /* ---- reveal on scroll ---- */

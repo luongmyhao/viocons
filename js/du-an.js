@@ -7,7 +7,7 @@
   var ZOOM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21M10.5 7.5v6M7.5 10.5h6"/></svg>';
   var TYPE = { 'dan-dung': 'Công trình dân dụng', 'cong-cong': 'Công trình công cộng' };
   function card(p, i) {
-    return '<article class="pj-card" data-i="' + i + '" tabindex="0" role="button" aria-label="Xem ảnh ' + esc(p.name) + '">' +
+    return '<article class="pj-card" id="pj-' + i + '" data-i="' + i + '" tabindex="0" role="button" aria-label="Xem ảnh ' + esc(p.name) + '">' +
       '<div class="pj-img" style="background-image:url(\'' + esc(p.img) + '\')"></div>' +
       '<span class="pj-zoom">' + ZOOM + '</span>' +
       '<div class="pj-head"><span class="pj-num">' + (i < 9 ? '0' : '') + (i + 1) + '</span><h3 class="pj-name">' + esc(p.name) + '</h3><p class="pj-meta">' + esc(p.meta) + '</p></div>' +
@@ -16,8 +16,24 @@
   var nDan = 0, nCong = 0;
   gDan.innerHTML = P.map(function (p, i) { return p.group === 'dan-dung' ? (nDan++, card(p, i)) : ''; }).join('');
   gCong.innerHTML = P.map(function (p, i) { return p.group === 'cong-cong' ? (nCong++, card(p, i)) : ''; }).join('');
+  document.getElementById('cntAll').textContent = '(' + (nDan + nCong) + ')';
   document.getElementById('cntDan').textContent = '(' + nDan + ')';
   document.getElementById('cntCong').textContent = '(' + nCong + ')';
+
+
+  // mỗi tab dự án con chỉ hiện công trình của nhóm đó (?nhom=dan-dung | cong-cong); không có tham số = tất cả
+  var nhom = new URLSearchParams(location.search).get('nhom');
+  if (nhom !== 'dan-dung' && nhom !== 'cong-cong') nhom = '';
+  var NAMES = { 'dan-dung': 'Công trình dân dụng', 'cong-cong': 'Công trình công cộng' };
+  if (nhom) {
+    document.getElementById(nhom === 'dan-dung' ? 'cong-cong' : 'dan-dung').hidden = true;
+    document.getElementById('pjTitle').innerHTML = NAMES[nhom] + '<br>đã thực hiện.';
+    document.getElementById('pjEyebrow').textContent = 'Dự án';
+    document.title = NAMES[nhom] + ' — VIOCONS';
+  }
+  document.querySelectorAll('.subnav a').forEach(function (a) { if ((a.getAttribute('data-nhom') || '') === nhom) a.classList.add('is-current'); });
+  document.querySelectorAll('.sub-item').forEach(function (it) { if (it.getAttribute('data-group') === nhom) it.classList.add('current'); });
+  if (location.hash) { var el = document.querySelector(location.hash); if (el) setTimeout(function () { el.scrollIntoView({ block: 'center' }); }, 300); }
 
   // rê chuột: ảnh zoom từ từ, chữ chạy lên rồi biến mất (cùng hiệu ứng ở trang chủ)
   document.querySelectorAll('.pj-card').forEach(function (c) {

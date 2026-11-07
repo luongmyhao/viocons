@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/hero.webp">
-  <link rel="stylesheet" href="css/style.css?v=66">
+  <link rel="stylesheet" href="css/style.css?v=67">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="hs-sharpen" color-interpolation-filters="sRGB"><feConvolveMatrix order="3" kernelMatrix="0 -0.6 0  -0.6 3.4 -0.6  0 -0.6 0" preserveAlpha="true"/></filter></svg>
@@ -32,8 +32,14 @@
       <div class="nav-item has-sub">
         <a href="du-an.html" class="active" aria-current="page">Dự án</a>
         <div class="nav-sub" role="menu">
-          <a href="du-an.html#dan-dung" role="menuitem">Công trình dân dụng</a>
-          <a href="du-an.html#cong-cong" role="menuitem">Công trình công cộng</a>
+          <div class="sub-item" data-group="dan-dung">
+            <a href="du-an.html?nhom=dan-dung" role="menuitem">Công trình dân dụng</a>
+            <ul class="sub-projects" aria-label="Các dự án dân dụng"></ul>
+          </div>
+          <div class="sub-item" data-group="cong-cong">
+            <a href="du-an.html?nhom=cong-cong" role="menuitem">Công trình công cộng</a>
+            <ul class="sub-projects" aria-label="Các dự án công cộng"></ul>
+          </div>
         </div>
       </div>
       <a href="index.html#du-toan">Dự toán</a>
@@ -92,11 +98,12 @@
 <section class="section pj-page" id="tat-ca-du-an">
   <div class="container">
     <header class="section-head reveal">
-      <p class="eyebrow">Dự án</p>
-      <h2>Tất cả dự án VIOCONS<br>đã thực hiện.</h2>
+      <p class="eyebrow" id="pjEyebrow">Dự án</p>
+      <h2 id="pjTitle">Tất cả dự án VIOCONS<br>đã thực hiện.</h2>
       <nav class="subnav" aria-label="Thư mục dự án">
-        <a href="#dan-dung">Công trình dân dụng <b id="cntDan"></b></a>
-        <a href="#cong-cong">Công trình công cộng <b id="cntCong"></b></a>
+        <a href="du-an.html" data-nhom="">Tất cả dự án <b id="cntAll"></b></a>
+        <a href="du-an.html?nhom=dan-dung" data-nhom="dan-dung">Công trình dân dụng <b id="cntDan"></b></a>
+        <a href="du-an.html?nhom=cong-cong" data-nhom="cong-cong">Công trình công cộng <b id="cntCong"></b></a>
       </nav>
     </header>
   </div>
@@ -193,7 +200,7 @@
 </aside>
 
 <script src="js/projects.js?v=1"></script>
-<script src="js/main.js?v=66"></script>
-<script src="js/du-an.js?v=1"></script>
+<script src="js/main.js?v=67"></script>
+<script src="js/du-an.js?v=2"></script>
 </body>
 </html>

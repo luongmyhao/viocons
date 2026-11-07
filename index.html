@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/hero.webp">
-  <link rel="stylesheet" href="css/style.css?v=66">
+  <link rel="stylesheet" href="css/style.css?v=67">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="hs-sharpen" color-interpolation-filters="sRGB"><feConvolveMatrix order="3" kernelMatrix="0 -0.6 0  -0.6 3.4 -0.6  0 -0.6 0" preserveAlpha="true"/></filter></svg>
@@ -33,8 +33,14 @@
       <div class="nav-item has-sub">
         <a href="du-an.html">Dự án</a>
         <div class="nav-sub" role="menu">
-          <a href="du-an.html#dan-dung" role="menuitem">Công trình dân dụng</a>
-          <a href="du-an.html#cong-cong" role="menuitem">Công trình công cộng</a>
+          <div class="sub-item" data-group="dan-dung">
+            <a href="du-an.html?nhom=dan-dung" role="menuitem">Công trình dân dụng</a>
+            <ul class="sub-projects" aria-label="Các dự án dân dụng"></ul>
+          </div>
+          <div class="sub-item" data-group="cong-cong">
+            <a href="du-an.html?nhom=cong-cong" role="menuitem">Công trình công cộng</a>
+            <ul class="sub-projects" aria-label="Các dự án công cộng"></ul>
+          </div>
         </div>
       </div>
       <a href="#du-toan">Dự toán</a>
@@ -420,6 +426,6 @@
 </aside>
 
 <script src="js/projects.js?v=1"></script>
-<script src="js/main.js?v=66"></script>
+<script src="js/main.js?v=67"></script>
 </body>
 </html>
