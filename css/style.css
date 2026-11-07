@@ -1267,3 +1267,22 @@ body.hero-in-view .fab { opacity: 0; transform: translateY(16px); pointer-events
   .pj-card:hover::before { opacity: 1; }
   .pj-card:hover .pj-zoom { opacity: 0; }
 }
+
+/* =====================================================================
+   v53 — chữ thông tin dự án to hơn; rê chuột: ảnh zoom từ từ liên tục cho đến khi rê đi; lớp tối đậm hơn
+   ===================================================================== */
+.pj-head { gap: 12px; top: 38px; left: 34px; }
+.pj-num { font-size: 1rem; }
+.pj-num::after { width: 36px; height: 3px; }
+.pj-head .pj-name { font-size: clamp(1.5rem, 2.3vw, 2.15rem); line-height: 1.2; }
+.pj-head .pj-meta { font-size: 1.05rem; line-height: 1.45; }
+.pj-type { font-size: .92rem; letter-spacing: .26em; }
+
+/* lớp tối đậm hơn */
+.pj-card::before { background: linear-gradient(180deg, rgba(5,5,5,.9) 0%, rgba(5,5,5,.62) 40%, rgba(5,5,5,.5) 62%, rgba(5,5,5,.88) 100%); }
+.pj-card:hover::before, .pj-card:focus-visible::before { opacity: .38; }
+
+/* zoom từ từ: về nhanh vừa phải khi rê đi, tiến rất chậm khi đang rê */
+.pj-img { transition: transform 1.4s cubic-bezier(.22, .8, .2, 1); }
+.pj-card:hover .pj-img, .pj-card:focus-visible .pj-img { transform: scale(1.7); transition: transform 12s cubic-bezier(.12, .55, .25, 1); }
+@media (max-width: 640px) { .pj-head .pj-name { font-size: 1.4rem; } .pj-head .pj-meta { font-size: 1rem; } }
