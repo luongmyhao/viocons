@@ -719,8 +719,7 @@ body::before {
 
 /* trang con: cùng headline, cao 3/4 màn hình */
 .hero-short .hero-stage { min-height: 75vh; }
-.hero-short .hero-stage .hero-grid { padding: 56px 0; }
+.hero-short .hero-stage .hero-grid { padding: 72px 0; }
 .hero-short .hero-title .arrow { width: clamp(52px, 7.5vw, 104px); }
 .hero-short h1 .l2 { font-size: clamp(2.5rem, 7vw, 6rem); }
-.hero-short .lead { margin-top: 30px; }
-@media (max-width: 760px) { .hero-short .hero-stage { min-height: 75vh; } .hero-short .hero-stage .hero-grid { padding: 44px 0; } }
+@media (max-width: 760px) { .hero-short .hero-stage { min-height: 75vh; } }
