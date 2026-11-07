@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/hero.webp">
-  <link rel="stylesheet" href="css/style.css?v=74">
+  <link rel="stylesheet" href="css/style.css?v=77">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="hs-sharpen" color-interpolation-filters="sRGB"><feConvolveMatrix order="3" kernelMatrix="0 -0.6 0  -0.6 3.4 -0.6  0 -0.6 0" preserveAlpha="true"/></filter></svg>
@@ -94,21 +94,43 @@
   </div>
 </section>
 
-<!-- ============ GIỚI THIỆU DỊCH VỤ ============ -->
+<!-- ============ TỔNG QUAN DỊCH VỤ ============ -->
+<nav class="svc-tabs" id="svcTabs" aria-label="Các phần của trang Dịch vụ">
+  <div class="container svc-tabs-in">
+    <a href="#dich-vu-tong-quan" data-sec="dich-vu-tong-quan">Tổng quan</a>
+    <a href="#tu-van-thiet-ke" data-sec="tu-van-thiet-ke">Tư vấn – Thiết kế</a>
+    <a href="#thi-cong-xay-dung" data-sec="thi-cong-xay-dung">Thi công xây dựng</a>
+    <a href="#quy-trinh-thi-cong" data-sec="quy-trinh-thi-cong">Cách thi công</a>
+    <a href="#nang-luc-thi-cong" data-sec="nang-luc-thi-cong">Năng lực thi công</a>
+  </div>
+</nav>
+
 <section class="section" id="dich-vu-tong-quan">
-  <div class="container about-grid">
-    <header class="reveal">
+  <div class="container">
+    <header class="section-head reveal">
       <p class="eyebrow">Dịch vụ</p>
       <h2>Hai dịch vụ,<br>một đầu mối.</h2>
-      <nav class="subnav" aria-label="Trong trang">
-        <a href="#tu-van-thiet-ke">Tư vấn – Thiết kế</a>
-        <a href="#thi-cong-xay-dung">Thi công xây dựng</a>
-        <a href="#nang-luc-thi-cong">Năng lực thi công</a>
-      </nav>
+      <p class="sub">VIOCONS đồng hành cùng khách hàng từ ý tưởng đến công trình thực tế: tư vấn và thiết kế không gian phù hợp với nhu cầu sống và làm việc, sau đó trực tiếp thi công để biến bản vẽ thành công trình hoàn chỉnh. Mọi công đoạn do các kỹ sư giàu kinh nghiệm thực hiện — <strong>Tử tế · Tận tâm · Trường tồn</strong>.</p>
     </header>
-    <div class="about-copy reveal">
-      <p>VIOCONS đồng hành cùng khách hàng từ ý tưởng đến công trình thực tế: tư vấn và thiết kế không gian phù hợp với nhu cầu sống và làm việc, sau đó trực tiếp thi công để biến bản vẽ thành công trình hoàn chỉnh.</p>
-      <p>Mọi công đoạn đều do các kỹ sư giàu kinh nghiệm thực hiện, với giá trị cốt lõi <strong>Tử tế · Tận tâm · Trường tồn</strong>.</p>
+    <div class="services two photos">
+      <article class="service has-photo">
+        <img class="service-bg" src="assets/services/svc-01.webp" alt="" loading="lazy" style="object-position:50% 37%">
+        <span class="num">01</span>
+        <div class="service-body">
+          <h3>Tư vấn – Thiết kế</h3>
+          <p>Tư vấn giải pháp đầu tư, khảo sát hiện trạng; thiết kế kiến trúc, kết cấu, cơ điện và hạ tầng — hướng tới dự án khả thi, chi phí tối ưu.</p>
+          <a class="more" href="#tu-van-thiet-ke">Xem chi tiết dịch vụ ↓</a>
+        </div>
+      </article>
+      <article class="service has-photo">
+        <img class="service-bg" src="assets/services/svc-02.webp" alt="" loading="lazy" style="object-position:50% 50%">
+        <span class="num">02</span>
+        <div class="service-body">
+          <h3>Thi công xây dựng</h3>
+          <p>Biến bản vẽ thành công trình hoàn chỉnh, kiểm soát chất lượng, tiến độ và chi phí xuyên suốt quá trình thi công.</p>
+          <a class="more" href="#thi-cong-xay-dung">Xem chi tiết dịch vụ ↓</a>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -176,7 +198,7 @@
           <img src="assets/services/svc-02.webp" alt="" loading="lazy" style="object-position:50% 52%">
           <figcaption><b>05</b><span>nhóm công trình VIOCONS thi công</span></figcaption>
         </figure>
-        <a class="more" href="index.html#du-an">Xem các dự án đã thực hiện →</a>
+        <a class="more" href="du-an.html">Xem tất cả dự án đã thực hiện →</a>
       </aside>
       <div class="scope-list">
       <article class="scope-item reveal">
@@ -185,7 +207,7 @@
           <h3>Nhà cao tầng</h3>
           <p>Triển khai và quản lý thi công công trình nhà cao tầng, kiểm soát chặt chẽ chất lượng, tiến độ và chi phí.</p>
           <ul class="tagrow"><li>Gia công cốt thép</li><li>Giàn giáo &amp; cốp pha</li><li>Bơm bê tông</li></ul>
-          <p class="proj-line"><span>Liên hệ để trao đổi phương án cụ thể</span></p>
+          <p class="proj-line"><span>Liên hệ để trao đổi phương án cụ thể</span><a href="#lien-he">Nhận tư vấn</a></p>
         </div>
       </article>
       <article class="scope-item reveal">
@@ -194,7 +216,7 @@
           <h3>Khu đô thị thấp tầng</h3>
           <p>Thi công khu nhà ở liền kề và khu đô thị thấp tầng.</p>
           <ul class="tagrow"><li>Xây &amp; trát</li><li>Cốp pha &amp; cốt thép</li><li>Hoàn thiện</li></ul>
-          <p class="proj-line"><span>Dự án tiêu biểu</span><a href="index.html#du-an">ECO RETREAT – khu nhà ở liền kề</a></p>
+          <p class="proj-line"><span>Dự án tiêu biểu</span><a href="du-an-chi-tiet.html?id=eco-retreat">ECO RETREAT – khu nhà ở liền kề</a></p>
         </div>
       </article>
       <article class="scope-item reveal">
@@ -203,7 +225,7 @@
           <h3>Hạ tầng kỹ thuật</h3>
           <p>Thi công đường giao thông, rạch, kè và các hạng mục hạ tầng kỹ thuật.</p>
           <ul class="tagrow"><li>Đào đắp &amp; vận chuyển</li><li>Bơm &amp; thoát nước</li><li>Đo đạc, định vị</li></ul>
-          <p class="proj-line"><span>Dự án tiêu biểu</span><a href="index.html#du-an">Đường Tỉnh 826C</a> · <a href="index.html#du-an">Đường Tân Quý – Tân Đại</a> · <a href="index.html#du-an">Rạch Bảo Định</a> · <a href="index.html#du-an">Kè Tân Thành</a></p>
+          <p class="proj-line"><span>Dự án tiêu biểu</span><a href="du-an-chi-tiet.html?id=duong-tinh-826c">Đường Tỉnh 826C</a> · <a href="du-an-chi-tiet.html?id=duong-tan-quy-tan-dai">Đường Tân Quý – Tân Đại</a> · <a href="du-an-chi-tiet.html?id=rach-bao-dinh">Rạch Bảo Định</a> · <a href="du-an-chi-tiet.html?id=ke-tan-thanh">Kè Tân Thành</a></p>
         </div>
       </article>
       <article class="scope-item reveal">
@@ -212,7 +234,7 @@
           <h3>Nâng cấp, cải tạo công trình</h3>
           <p>Sửa chữa, nâng cấp và cải tạo công trình hiện hữu, tiêu biểu là các công trình trường học.</p>
           <ul class="tagrow"><li>Sửa chữa &amp; cải tạo</li><li>Hoàn thiện</li><li>An toàn lao động</li></ul>
-          <p class="proj-line"><span>Dự án tiêu biểu</span><a href="index.html#du-an">THCS Tăng Bạt Hổ</a> · <a href="index.html#du-an">Mầm non 19/5</a> · <a href="index.html#du-an">THCS Lý Thánh Tông</a> · <a href="index.html#du-an">Tiểu học Mỹ Lộc</a></p>
+          <p class="proj-line"><span>Dự án tiêu biểu</span><a href="du-an-chi-tiet.html?id=thcs-tang-bat-ho">THCS Tăng Bạt Hổ</a> · <a href="du-an-chi-tiet.html?id=mam-non-19-5">Mầm non 19/5</a> · <a href="du-an-chi-tiet.html?id=thcs-ly-thanh-tong">THCS Lý Thánh Tông</a> · <a href="du-an-chi-tiet.html?id=tieu-hoc-my-loc">Tiểu học Mỹ Lộc</a></p>
         </div>
       </article>
       <article class="scope-item reveal">
@@ -221,7 +243,7 @@
           <h3>Các hạng mục xây dựng khác</h3>
           <p>Tiếp nhận các hạng mục xây dựng khác theo yêu cầu của khách hàng.</p>
           
-          <p class="proj-line"><span>Liên hệ để trao đổi phương án cụ thể</span></p>
+          <p class="proj-line"><span>Liên hệ để trao đổi phương án cụ thể</span><a href="#lien-he">Nhận tư vấn</a></p>
         </div>
       </article>
       </div>
@@ -276,10 +298,10 @@
     </header>
 
     <div class="team-stats reveal">
-      <div><b>50</b><span>bộ giàn giáo thép</span></div>
-      <div><b>50</b><span>bộ cốp pha thép</span></div>
-      <div><b>10.000</b><span>m² cốp pha gỗ dán</span></div>
-      <div><b>9</b><span>máy trộn vữa 180 L</span></div>
+      <div><b data-count="50">50</b><span>bộ giàn giáo thép</span></div>
+      <div><b data-count="50">50</b><span>bộ cốp pha thép</span></div>
+      <div><b data-count="10000">10.000</b><span>m² cốp pha gỗ dán</span></div>
+      <div><b data-count="9">9</b><span>máy trộn vữa 180 L</span></div>
     </div>
 
     <div class="pillars">
@@ -457,6 +479,6 @@
 </aside>
 
 <script src="js/projects.js?v=3"></script>
-<script src="js/main.js?v=76"></script>
+<script src="js/main.js?v=77"></script>
 </body>
 </html>
